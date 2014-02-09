@@ -31,7 +31,8 @@
     if (self) {
         
         // Custom initialization
-        self.navigationItem.title = @"Earthquakes";        
+        self.tabBarItem.title = @"Map";
+        self.tabBarItem.image = [UIImage imageNamed:@"first"];
     }
     return self;
 }
@@ -41,30 +42,30 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
-    [[PBAQuakeStore sharedStore] downloadDataWithCompletion:^(NSArray *quakes, NSError *error) {
-        
-        [hud hide:YES];
-
-        if (!error)
-        {
-            self.quakeData = quakes;
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self plot];
-            });
-        }
-        else
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                            message:@"There was an error performing the request. Please try again."
-                                                           delegate:self
-                                                  cancelButtonTitle:@"Okay"
-                                                  otherButtonTitles:nil];
-            [alert show];
-        }
-    }];
+//    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    
+//    [[PBAQuakeStore sharedStore] downloadDataWithCompletion:^(NSArray *quakes, NSError *error) {
+//        
+//        [hud hide:YES];
+//
+//        if (!error)
+//        {
+//            self.quakeData = quakes;
+//            
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [self plot];
+//            });
+//        }
+//        else
+//        {
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+//                                                            message:@"There was an error performing the request. Please try again."
+//                                                           delegate:self
+//                                                  cancelButtonTitle:@"Okay"
+//                                                  otherButtonTitles:nil];
+//            [alert show];
+//        }
+//    }];
 }
 
 - (void)didReceiveMemoryWarning
