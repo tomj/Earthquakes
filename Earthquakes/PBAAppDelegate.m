@@ -16,10 +16,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     PBAMapViewController *mvc = [[PBAMapViewController alloc] init];
-    
-    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:mvc];
-    
-    self.window.rootViewController = nc;
+
+    self.window.rootViewController = mvc;
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

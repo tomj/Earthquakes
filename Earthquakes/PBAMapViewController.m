@@ -31,7 +31,8 @@
     if (self) {
         
         // Custom initialization
-        self.navigationItem.title = @"Earthquakes";        
+        self.tabBarItem.title = @"Map";
+        self.tabBarItem.image = [UIImage imageNamed:@"first"];
     }
     return self;
 }
@@ -71,6 +72,22 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation
+{
+	MKPinAnnotationView *newAnnotation = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pinLocation"];
+
+	// hide user
+//	if (annotation == self.mapView.userLocation) {
+//        return nil;
+//    }
+    
+	newAnnotation.pinColor = MKPinAnnotationColorRed;
+	newAnnotation.canShowCallout = YES;
+	newAnnotation.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+	
+	return newAnnotation;
 }
 
 /*
