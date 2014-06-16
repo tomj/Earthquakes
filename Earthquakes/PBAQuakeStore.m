@@ -23,44 +23,29 @@ NSString * const PBAQuakeStoreBaseURLString = @"http://earthquake-report.com/fee
     return sharedStore;
 }
 
-- (id)init
+- (instancetype)init
 {
     self = [super init];
     if (self) {
-        //
+
     }
     return self;
 }
-
-/*
- ...
- {
-     "date_time" = "2014-02-05T12:26:37+00:00";
-     depth = 198;
-     latitude = "-21.21";
-     link = "http://earthquake-report.com/2014/02/05/moderate-earthquake-potosi-bolivia-on-february-5-2014/";
-     location = "POTOSI, BOLIVIA";
-     longitude = "-67.99";
-     magnitude = "4.2";
-     title = "Moderate earthquake - Potosi, Bolivia on February 5, 2014";
- }
- ...
- */
 
 - (void)downloadDataWithCompletion:(void (^)(NSArray *quakes, NSError *error))completion
 {
     NSMutableArray *quakeData = [NSMutableArray array];
 
-    //Returns a shared singleton session object. The shared session uses the currently set
+    // returns a shared singleton session object. The shared session uses the currently set
     //global NSURLCache, NSHTTPCookieStorage, and NSURLCredentialStorage objects and is based on the default configuration.
     NSURLSession *sess = [NSURLSession sharedSession];
 
-    //reuse base url
+    // reuse base url
     NSString *path = [NSString stringWithFormat:@"%@%@", PBAQuakeStoreBaseURLString, @"recent-eq?json"];
     NSURL *url = [NSURL URLWithString:path];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
-    //create a data (download) task
+    // create a data (download) task
     NSURLSessionDataTask *task = [sess dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
 
         if (!error) {
