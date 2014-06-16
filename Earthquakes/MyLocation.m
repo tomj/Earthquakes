@@ -11,8 +11,7 @@
 
 - (instancetype)initWithName:(NSString*)name address:(NSString*)address coordinate:(CLLocationCoordinate2D)coordinate
 {
-	if ((self = [super init]))
-    {
+	if ((self = [super init])) {
 		_name = [name copy];
 		_address = [address copy];
 		_coordinate = coordinate;
@@ -22,12 +21,10 @@
 
 - (NSString *)title
 {
-	if ([_name isKindOfClass:[NSNull class]])
-    {
+	if ([_name isKindOfClass:[NSNull class]]) {
 		return @"Unknown";
 	}
-    else
-    {
+    else {
 		return _name;
     }
 }
