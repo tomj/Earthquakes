@@ -33,18 +33,19 @@ NSString * const PBAQuakeStoreBaseURLString = @"http://earthquake-report.com/fee
 }
 
 /*
+ ...
  {
- "date_time" = "2014-02-05T12:26:37+00:00";
- depth = 198;
- latitude = "-21.21";
- link = "http://earthquake-report.com/2014/02/05/moderate-earthquake-potosi-bolivia-on-february-5-2014/";
- location = "POTOSI, BOLIVIA";
- longitude = "-67.99";
- magnitude = "4.2";
- title = "Moderate earthquake - Potosi, Bolivia on February 5, 2014";
+     "date_time" = "2014-02-05T12:26:37+00:00";
+     depth = 198;
+     latitude = "-21.21";
+     link = "http://earthquake-report.com/2014/02/05/moderate-earthquake-potosi-bolivia-on-february-5-2014/";
+     location = "POTOSI, BOLIVIA";
+     longitude = "-67.99";
+     magnitude = "4.2";
+     title = "Moderate earthquake - Potosi, Bolivia on February 5, 2014";
  }
+ ...
  */
-
 
 - (void)downloadDataWithCompletion:(void (^)(NSArray *quakes, NSError *error))completion
 {
@@ -62,12 +63,10 @@ NSString * const PBAQuakeStoreBaseURLString = @"http://earthquake-report.com/fee
     //create a data (download) task
     NSURLSessionDataTask *task = [sess dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
 
-        if (!error)
-        {
+        if (!error) {
             NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
 
-            for (NSDictionary *d in json)
-            {
+            for (NSDictionary *d in json) {
                 PBAQuake *quake = [[PBAQuake alloc] init];
                 quake.location = [d objectForKey:@"location"];
                 quake.quakeTitle = [d objectForKey:@"title"];
@@ -81,13 +80,11 @@ NSString * const PBAQuakeStoreBaseURLString = @"http://earthquake-report.com/fee
                 [quakeData addObject:quake];
             }
 
-            // TODO
             if (completion) {
                 completion(quakeData, nil);
             }
         }
-        else
-        {
+        else {
             if (completion) {
                 completion(nil, error);
             }

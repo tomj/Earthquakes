@@ -8,7 +8,6 @@
 
 #import "PBAAppDelegate.h"
 #import "PBAMapViewController.h"
-#import "PBAPlotViewController.h"
 
 @implementation PBAAppDelegate
 
@@ -17,12 +16,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     PBAMapViewController *mvc = [[PBAMapViewController alloc] init];
-    PBAPlotViewController *pvc = [[PBAPlotViewController alloc] init];
-    
-    UITabBarController *tb = [[UITabBarController alloc] init];
-    tb.viewControllers = @[mvc, pvc];
-    
-    self.window.rootViewController = tb;
+
+    self.window.rootViewController = mvc;
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
