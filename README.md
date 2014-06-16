@@ -1,5 +1,5 @@
 # Earthquakes
 
-![iPhone app screenshot](http://i.imgur.com/GtDGUS2.png =320x)
+A simple to show the use of NSURLSession and MapKit.
 
 ![iPad app screenshot](http://i.imgur.com/0TIZMDy.png =320x)
