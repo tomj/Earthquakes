@@ -9,7 +9,7 @@
 
 @implementation MyLocation
 
-- (id)initWithName:(NSString*)name address:(NSString*)address coordinate:(CLLocationCoordinate2D)coordinate
+- (instancetype)initWithName:(NSString*)name address:(NSString*)address coordinate:(CLLocationCoordinate2D)coordinate
 {
 	if ((self = [super init]))
     {
