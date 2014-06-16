@@ -23,11 +23,11 @@ NSString * const PBAQuakeStoreBaseURLString = @"http://earthquake-report.com/fee
     return sharedStore;
 }
 
-- (id)init
+- (instancetype)init
 {
     self = [super init];
     if (self) {
-        //
+
     }
     return self;
 }
