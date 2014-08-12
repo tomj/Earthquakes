@@ -6,6 +6,11 @@
 //  Copyright (c) 2014 Pouria Almassi. All rights reserved.
 //
 
+//
+#import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
+#import <QuartzCore/QuartzCore.h>
+
 #import "PBAMapViewController.h"
 #import "MBProgressHUD.h"
 
@@ -16,10 +21,14 @@
 #import "PBAQuake.h"
 #import "MyLocation.h"
 
-@interface PBAMapViewController ()
+@import CoreLocation;
+
+@interface PBAMapViewController () <CLLocationManagerDelegate>
 
 @property (nonatomic, weak) IBOutlet MKMapView *mapView;
 @property (nonatomic, strong) NSArray *quakeData;
+
+@property (strong, nonatomic) CLLocationManager *locationManager;
 
 @end
 
@@ -65,6 +74,15 @@
             [alert show];
         }
     }];
+    
+    if (!self.locationManager) {
+        self.locationManager = [[CLLocationManager alloc] init];
+    }
+    
+    self.locationManager.delegate = self;
+	self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+	self.locationManager.distanceFilter = 2;
+    [self.locationManager startUpdatingLocation];
 }
 
 - (void)didReceiveMemoryWarning
@@ -80,6 +98,10 @@
 	newAnnotation.pinColor = MKPinAnnotationColorRed;
 	newAnnotation.canShowCallout = YES;
 	//newAnnotation.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    
+    if (annotation == self.mapView.userLocation) {
+        return nil;
+    }
 	
 	return newAnnotation;
 }
