@@ -23,7 +23,7 @@
 
 @import CoreLocation;
 
-@interface PBAMapViewController () <CLLocationManagerDelegate>
+@interface PBAMapViewController () <CLLocationManagerDelegate, MKMapViewDelegate>
 
 @property (nonatomic, weak) IBOutlet MKMapView *mapView;
 @property (nonatomic, strong) NSArray *quakeData;
@@ -57,7 +57,7 @@
     [[PBAQuakeStore sharedStore] downloadDataWithCompletion:^(NSArray *quakes, NSError *error) {
         
         [hud hide:YES];
-
+        
         if (!error) {
             self.quakeData = quakes;
             
@@ -75,6 +75,11 @@
         }
     }];
     
+    // map view
+    self.mapView.delegate = self;
+	self.mapView.showsUserLocation = YES;
+    
+    // core location
     if (!self.locationManager) {
         self.locationManager = [[CLLocationManager alloc] init];
     }
@@ -88,23 +93,31 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation
 {
 	MKPinAnnotationView *newAnnotation = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pinLocation"];
     
+    if (annotation == self.mapView.userLocation) {
+        return nil;
+    }
+    
 	newAnnotation.pinColor = MKPinAnnotationColorRed;
 	newAnnotation.canShowCallout = YES;
 	//newAnnotation.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     
-    if (annotation == self.mapView.userLocation) {
-        return nil;
-    }
-	
 	return newAnnotation;
 }
+
+#pragma mark - Core Location
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    NSLog(@"%f, %f", self.mapView.userLocation.coordinate.latitude, self.mapView.userLocation.coordinate.longitude);
+}
+
+#pragma mark - Custom methods
 
 - (void)plotQuakeData
 {
