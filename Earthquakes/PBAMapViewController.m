@@ -6,6 +6,11 @@
 //  Copyright (c) 2014 Pouria Almassi. All rights reserved.
 //
 
+//
+#import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
+#import <QuartzCore/QuartzCore.h>
+
 #import "PBAMapViewController.h"
 #import "MBProgressHUD.h"
 
@@ -16,10 +21,14 @@
 #import "PBAQuake.h"
 #import "MyLocation.h"
 
-@interface PBAMapViewController ()
+@import CoreLocation;
+
+@interface PBAMapViewController () <CLLocationManagerDelegate, MKMapViewDelegate>
 
 @property (nonatomic, weak) IBOutlet MKMapView *mapView;
 @property (nonatomic, strong) NSArray *quakeData;
+
+@property (strong, nonatomic) CLLocationManager *locationManager;
 
 @end
 
@@ -48,7 +57,7 @@
     [[PBAQuakeStore sharedStore] downloadDataWithCompletion:^(NSArray *quakes, NSError *error) {
         
         [hud hide:YES];
-
+        
         if (!error) {
             self.quakeData = quakes;
             
@@ -65,24 +74,50 @@
             [alert show];
         }
     }];
+    
+    // map view
+    self.mapView.delegate = self;
+	self.mapView.showsUserLocation = YES;
+    
+    // core location
+    if (!self.locationManager) {
+        self.locationManager = [[CLLocationManager alloc] init];
+    }
+    
+    self.locationManager.delegate = self;
+	self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+	self.locationManager.distanceFilter = 2;
+    [self.locationManager startUpdatingLocation];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation
 {
 	MKPinAnnotationView *newAnnotation = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pinLocation"];
     
+    if (annotation == self.mapView.userLocation) {
+        return nil;
+    }
+    
 	newAnnotation.pinColor = MKPinAnnotationColorRed;
 	newAnnotation.canShowCallout = YES;
 	//newAnnotation.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-	
+    
 	return newAnnotation;
 }
+
+#pragma mark - Core Location
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    NSLog(@"%f, %f", self.mapView.userLocation.coordinate.latitude, self.mapView.userLocation.coordinate.longitude);
+}
+
+#pragma mark - Custom methods
 
 - (void)plotQuakeData
 {
