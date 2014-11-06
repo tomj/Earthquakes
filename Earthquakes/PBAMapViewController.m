@@ -38,8 +38,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
-        // Custom initialization
         self.tabBarItem.title = @"Map";
         self.tabBarItem.image = [UIImage imageNamed:@"first"];
     }
@@ -49,11 +47,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // Do any additional setup after loading the view from its nib.
-    
+
+    // progress indicator
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
+    // make network request call through the store
     [[PBAQuakeStore sharedStore] downloadDataWithCompletion:^(NSArray *quakes, NSError *error) {
         
         [hud hide:YES];
@@ -95,7 +93,8 @@
     [super didReceiveMemoryWarning];
 }
 
-- (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation
+// similar to tableView:cellForRowAtIndexPath:
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation
 {
 	MKPinAnnotationView *newAnnotation = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pinLocation"];
     
@@ -105,7 +104,7 @@
     
 	newAnnotation.pinColor = MKPinAnnotationColorRed;
 	newAnnotation.canShowCallout = YES;
-	//newAnnotation.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+	newAnnotation.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     
 	return newAnnotation;
 }
