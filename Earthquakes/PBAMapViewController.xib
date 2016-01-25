@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PBAMapViewController">
             <connections>
+                <outlet property="latitudeLongitudeLabel" destination="vQX-UM-rKy" id="2i3-fr-NRF"/>
                 <outlet property="mapView" destination="1yQ-fz-n8c" id="GEs-GH-V24"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
@@ -22,12 +23,24 @@
                         <outlet property="delegate" destination="-1" id="8vS-mN-dan"/>
                     </connections>
                 </mapView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Latitude and Longitude" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQX-UM-rKy">
+                    <rect key="frame" x="8" y="539" width="304" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="AY4-nD-0kp"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="1yQ-fz-n8c" firstAttribute="top" secondItem="1" secondAttribute="top" id="8v3-Gc-Qov"/>
                 <constraint firstAttribute="trailing" secondItem="1yQ-fz-n8c" secondAttribute="trailing" id="HcM-F6-8Ah"/>
                 <constraint firstItem="1yQ-fz-n8c" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="O3E-SP-KgG"/>
+                <constraint firstAttribute="bottom" secondItem="vQX-UM-rKy" secondAttribute="bottom" constant="8" id="aRp-UY-t9s"/>
+                <constraint firstAttribute="trailing" secondItem="vQX-UM-rKy" secondAttribute="trailing" constant="8" id="cVd-zN-pQb"/>
+                <constraint firstItem="vQX-UM-rKy" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="8" id="rr0-dq-c1u"/>
                 <constraint firstAttribute="bottom" secondItem="1yQ-fz-n8c" secondAttribute="bottom" id="zrA-hD-DSx"/>
             </constraints>
         </view>

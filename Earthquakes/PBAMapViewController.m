@@ -26,6 +26,7 @@
 @interface PBAMapViewController () <CLLocationManagerDelegate, MKMapViewDelegate>
 
 @property (nonatomic, weak) IBOutlet MKMapView *mapView;
+@property (weak, nonatomic) IBOutlet UILabel *latitudeLongitudeLabel;
 @property (nonatomic, strong) NSArray *quakeData;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
@@ -49,25 +50,25 @@
     [super viewDidLoad];
 
     // progress indicator
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-
-    [[PBAQuakeStore sharedStore] downloadDataWithCompletion:^(NSArray *quakes, NSError *error) {
-        [hud hide:YES];
-        if (!error) {
-            self.quakeData = quakes;
-
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self plotQuakeData];
-            });
-        } else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                            message:@"There was an error performing the request. Please try again."
-                                                           delegate:self
-                                                  cancelButtonTitle:@"Okay"
-                                                  otherButtonTitles:nil];
-            [alert show];
-        }
-    }];
+//    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//
+//    [[PBAQuakeStore sharedStore] downloadDataWithCompletion:^(NSArray *quakes, NSError *error) {
+//        [hud hide:YES];
+//        if (!error) {
+//            self.quakeData = quakes;
+//
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [self plotQuakeData];
+//            });
+//        } else {
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+//                                                            message:@"There was an error performing the request. Please try again."
+//                                                           delegate:self
+//                                                  cancelButtonTitle:@"Okay"
+//                                                  otherButtonTitles:nil];
+//            [alert show];
+//        }
+//    }];
 
     if (!self.locationManager) {
         self.locationManager = [[CLLocationManager alloc] init];
@@ -75,7 +76,7 @@
 
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    self.locationManager.distanceFilter = 2;
+    self.locationManager.distanceFilter = 1;
 
     if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
         [self.locationManager requestWhenInUseAuthorization];
@@ -85,7 +86,6 @@
     self.mapView.delegate = self;
     self.mapView.showsUserLocation = YES;
     self.mapView.showsPointsOfInterest = NO;
-    self.mapView.showsScale = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -93,7 +93,6 @@
     [super didReceiveMemoryWarning];
 }
 
-// similar to tableView:cellForRowAtIndexPath:
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation
 {
     MKPinAnnotationView *newAnnotation = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pinLocation"];
@@ -113,7 +112,9 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    NSLog(@"%f, %f", self.mapView.userLocation.coordinate.latitude, self.mapView.userLocation.coordinate.longitude);
+    self.latitudeLongitudeLabel.text = [NSString stringWithFormat:@"%g, %g",
+                                        self.locationManager.location.coordinate.latitude,
+                                        self.locationManager.location.coordinate.longitude];
 }
 
 #pragma mark - Custom methods
