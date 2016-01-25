@@ -28,7 +28,6 @@
 		C57ADE6018A30B7F00D4DCF6 /* PBAQuake.m in Sources */ = {isa = PBXBuildFile; fileRef = C57ADE5F18A30B7F00D4DCF6 /* PBAQuake.m */; };
 		C57ADE6718A30D5000D4DCF6 /* PBAQuakeStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C57ADE6618A30D5000D4DCF6 /* PBAQuakeStore.m */; };
 		C59CB9991C560321005C9195 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C59CB9981C560321005C9195 /* Default-568h@2x.png */; };
-		C5B8771A18A83EE6001CBC8E /* PBAPlotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5B8771818A83EE6001CBC8E /* PBAPlotViewController.m */; };
 		C5B8771B18A83EE6001CBC8E /* PBAPlotViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5B8771918A83EE6001CBC8E /* PBAPlotViewController.xib */; };
 /* End PBXBuildFile section */
 
@@ -73,8 +72,6 @@
 		C57ADE6518A30D5000D4DCF6 /* PBAQuakeStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBAQuakeStore.h; sourceTree = "<group>"; };
 		C57ADE6618A30D5000D4DCF6 /* PBAQuakeStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBAQuakeStore.m; sourceTree = "<group>"; };
 		C59CB9981C560321005C9195 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		C5B8771718A83EE6001CBC8E /* PBAPlotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBAPlotViewController.h; sourceTree = "<group>"; };
-		C5B8771818A83EE6001CBC8E /* PBAPlotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBAPlotViewController.m; sourceTree = "<group>"; };
 		C5B8771918A83EE6001CBC8E /* PBAPlotViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PBAPlotViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -215,8 +212,6 @@
 				C57ADE2918A27A5B00D4DCF6 /* PBAAppDelegate.m */,
 				C57ADE4818A27A6900D4DCF6 /* PBAMapViewController.h */,
 				C57ADE4918A27A6900D4DCF6 /* PBAMapViewController.m */,
-				C5B8771718A83EE6001CBC8E /* PBAPlotViewController.h */,
-				C5B8771818A83EE6001CBC8E /* PBAPlotViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -341,7 +336,6 @@
 				C57ADE6718A30D5000D4DCF6 /* PBAQuakeStore.m in Sources */,
 				C57ADE2A18A27A5B00D4DCF6 /* PBAAppDelegate.m in Sources */,
 				C57ADE2618A27A5B00D4DCF6 /* main.m in Sources */,
-				C5B8771A18A83EE6001CBC8E /* PBAPlotViewController.m in Sources */,
 				C57ADE5818A2810900D4DCF6 /* MBProgressHUD.m in Sources */,
 				C57ADE6018A30B7F00D4DCF6 /* PBAQuake.m in Sources */,
 				C57ADE5318A27DA900D4DCF6 /* MyLocation.m in Sources */,
