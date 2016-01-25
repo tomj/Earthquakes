@@ -50,20 +50,16 @@
 
     // progress indicator
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
-    // make network request call through the store
+
     [[PBAQuakeStore sharedStore] downloadDataWithCompletion:^(NSArray *quakes, NSError *error) {
-        
         [hud hide:YES];
-        
         if (!error) {
             self.quakeData = quakes;
-            
+
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self plotQuakeData];
             });
-        }
-        else {
+        } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
                                                             message:@"There was an error performing the request. Please try again."
                                                            delegate:self
@@ -72,20 +68,24 @@
             [alert show];
         }
     }];
-    
-    // map view
-    self.mapView.delegate = self;
-	self.mapView.showsUserLocation = YES;
-    
-    // core location
+
     if (!self.locationManager) {
         self.locationManager = [[CLLocationManager alloc] init];
     }
-    
+
     self.locationManager.delegate = self;
-	self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-	self.locationManager.distanceFilter = 2;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    self.locationManager.distanceFilter = 2;
+
+    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [self.locationManager requestWhenInUseAuthorization];
+    }
     [self.locationManager startUpdatingLocation];
+
+    self.mapView.delegate = self;
+    self.mapView.showsUserLocation = YES;
+    self.mapView.showsPointsOfInterest = NO;
+    self.mapView.showsScale = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -96,17 +96,17 @@
 // similar to tableView:cellForRowAtIndexPath:
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation
 {
-	MKPinAnnotationView *newAnnotation = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pinLocation"];
-    
+    MKPinAnnotationView *newAnnotation = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pinLocation"];
+
     if (annotation == self.mapView.userLocation) {
         return nil;
     }
-    
-	newAnnotation.pinColor = MKPinAnnotationColorRed;
-	newAnnotation.canShowCallout = YES;
-	newAnnotation.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    
-	return newAnnotation;
+
+    newAnnotation.pinColor = MKPinAnnotationColorRed;
+    newAnnotation.canShowCallout = YES;
+    newAnnotation.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+
+    return newAnnotation;
 }
 
 #pragma mark - Core Location
@@ -120,20 +120,20 @@
 
 - (void)plotQuakeData
 {
-	for (PBAQuake *q in self.quakeData) {
+    for (PBAQuake *q in self.quakeData) {
         CLLocationCoordinate2D coordinate;
         coordinate.latitude = q.latitude;
         coordinate.longitude  = q.longitude;
         NSString *location = q.location;
         NSString *magnitude = [NSString stringWithFormat:@"Magnitude: %g", q.magnitude];
-        
+
         MyLocation *annotation = [[MyLocation alloc]
                                   initWithName:location
                                   address:magnitude
                                   coordinate:coordinate];
-        
+
         [self.mapView addAnnotation:annotation];
-	}
+    }
 }
 
 @end
