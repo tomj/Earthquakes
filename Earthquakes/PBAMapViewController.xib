@@ -8,7 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PBAMapViewController">
             <connections>
                 <outlet property="mapView" destination="1yQ-fz-n8c" id="GEs-GH-V24"/>
-                <outlet property="recenterMapToUserButton" destination="xe6-M6-PSf" id="xZH-XO-vGW"/>
+                <outlet property="recenterMapToUserButton" destination="xe6-M6-PSf" id="r8N-nq-EA1"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -31,7 +31,7 @@
                         <constraint firstAttribute="height" constant="45" id="eMr-sp-sdr"/>
                     </constraints>
                     <connections>
-                        <action selector="recenterMapToUsersCurrentLocation" destination="-1" eventType="touchDragInside" id="DgY-wl-pd0"/>
+                        <action selector="recenterMapToUsersCurrentLocation" destination="-1" eventType="touchUpInside" id="b4P-x1-BHU"/>
                     </connections>
                 </button>
             </subviews>
