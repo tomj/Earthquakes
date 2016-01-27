@@ -46,21 +46,6 @@
     return self;
 }
 
-//- (void)viewWillAppear:(BOOL)animated
-//{
-//    [super viewWillAppear:animated];
-//
-//    CLAuthorizationStatus stat = [CLLocationManager authorizationStatus];
-//    if (stat == kCLAuthorizationStatusRestricted || stat == kCLAuthorizationStatusDenied) {
-//        NSLog(@"%@", @"Oh well");
-//        return;
-//    } else if (stat == kCLAuthorizationStatusAuthorizedWhenInUse) {
-//        NSLog(@"kCLAuthorizationStatusAuthorizedWhenInUse");
-//    } else if (stat == kCLAuthorizationStatusAuthorizedAlways) {
-//        NSLog(@"kCLAuthorizationStatusAuthorizedAlways");
-//    }
-//}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
