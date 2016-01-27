@@ -6,10 +6,9 @@
 //  Copyright (c) 2014 Pouria Almassi. All rights reserved.
 //
 
-//
-#import <MapKit/MapKit.h>
-#import <CoreLocation/CoreLocation.h>
-#import <QuartzCore/QuartzCore.h>
+@import MapKit;
+@import CoreLocation;
+@import QuartzCore;
 
 #import "PBAMapViewController.h"
 #import "MBProgressHUD.h"
@@ -21,14 +20,16 @@
 #import "PBAQuake.h"
 #import "MyLocation.h"
 
+// Categories
+#import "UIButton+PBAButton.h"
+
 @import CoreLocation;
 
 @interface PBAMapViewController () <CLLocationManagerDelegate, MKMapViewDelegate>
 
-@property (nonatomic, weak) IBOutlet MKMapView *mapView;
-@property (weak, nonatomic) IBOutlet UILabel *latitudeLongitudeLabel;
-@property (nonatomic, strong) NSArray *quakeData;
-
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (weak, nonatomic) IBOutlet UIButton *recenterMapToUserButton;
+@property (strong, nonatomic) NSArray *quakeData;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
 @end
@@ -45,30 +46,41 @@
     return self;
 }
 
+//- (void)viewWillAppear:(BOOL)animated
+//{
+//    [super viewWillAppear:animated];
+//
+//    CLAuthorizationStatus stat = [CLLocationManager authorizationStatus];
+//    if (stat == kCLAuthorizationStatusRestricted || stat == kCLAuthorizationStatusDenied) {
+//        NSLog(@"%@", @"Oh well");
+//        return;
+//    } else if (stat == kCLAuthorizationStatusAuthorizedWhenInUse) {
+//        NSLog(@"kCLAuthorizationStatusAuthorizedWhenInUse");
+//    } else if (stat == kCLAuthorizationStatusAuthorizedAlways) {
+//        NSLog(@"kCLAuthorizationStatusAuthorizedAlways");
+//    }
+//}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    // progress indicator
-//    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//
-//    [[PBAQuakeStore sharedStore] downloadDataWithCompletion:^(NSArray *quakes, NSError *error) {
-//        [hud hide:YES];
-//        if (!error) {
-//            self.quakeData = quakes;
-//
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [self plotQuakeData];
-//            });
-//        } else {
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-//                                                            message:@"There was an error performing the request. Please try again."
-//                                                           delegate:self
-//                                                  cancelButtonTitle:@"Okay"
-//                                                  otherButtonTitles:nil];
-//            [alert show];
-//        }
-//    }];
+    [self.recenterMapToUserButton pba_setRoundedButtonStyle];
+
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [[PBAQuakeStore sharedStore] downloadDataWithCompletion:^(NSArray *quakes, NSError *error) {
+        [hud hide:YES];
+        if (!error) {
+            self.quakeData = quakes;
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self plotQuakeData];
+            });
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error performing the request. Please try again." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+            [alert show];
+        }
+    }];
 
     if (!self.locationManager) {
         self.locationManager = [[CLLocationManager alloc] init];
@@ -86,6 +98,8 @@
     self.mapView.delegate = self;
     self.mapView.showsUserLocation = YES;
     self.mapView.showsPointsOfInterest = NO;
+
+    [self recenterMapToUsersCurrentLocationAfterDelay:5.0];
 }
 
 - (void)didReceiveMemoryWarning
@@ -103,18 +117,8 @@
 
     newAnnotation.pinColor = MKPinAnnotationColorRed;
     newAnnotation.canShowCallout = YES;
-    newAnnotation.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
 
     return newAnnotation;
-}
-
-#pragma mark - Core Location
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
-{
-    self.latitudeLongitudeLabel.text = [NSString stringWithFormat:@"%g, %g",
-                                        self.locationManager.location.coordinate.latitude,
-                                        self.locationManager.location.coordinate.longitude];
 }
 
 #pragma mark - Custom methods
@@ -135,6 +139,19 @@
 
         [self.mapView addAnnotation:annotation];
     }
+}
+
+- (IBAction)recenterMapToUsersCurrentLocation
+{
+    [self recenterMapToUsersCurrentLocationAfterDelay:0.0];
+}
+
+- (void)recenterMapToUsersCurrentLocationAfterDelay:(double)delay {
+    __weak __typeof(self)weakSelf = self;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        strongSelf.mapView.centerCoordinate = strongSelf.mapView.userLocation.coordinate;
+    });
 }
 
 @end
