@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		C57ADE1A18A27A5B00D4DCF6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C57ADE1918A27A5B00D4DCF6 /* Foundation.framework */; };
-		C57ADE1C18A27A5B00D4DCF6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C57ADE1B18A27A5B00D4DCF6 /* CoreGraphics.framework */; };
 		C57ADE1E18A27A5B00D4DCF6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C57ADE1D18A27A5B00D4DCF6 /* UIKit.framework */; };
 		C57ADE2418A27A5B00D4DCF6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C57ADE2218A27A5B00D4DCF6 /* InfoPlist.strings */; };
 		C57ADE2618A27A5B00D4DCF6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C57ADE2518A27A5B00D4DCF6 /* main.m */; };
@@ -21,8 +20,6 @@
 		C57ADE3F18A27A5B00D4DCF6 /* EarthquakesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C57ADE3E18A27A5B00D4DCF6 /* EarthquakesTests.m */; };
 		C57ADE4B18A27A6900D4DCF6 /* PBAMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C57ADE4918A27A6900D4DCF6 /* PBAMapViewController.m */; };
 		C57ADE4C18A27A6900D4DCF6 /* PBAMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C57ADE4A18A27A6900D4DCF6 /* PBAMapViewController.xib */; };
-		C57ADE4E18A27AD100D4DCF6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C57ADE4D18A27AD100D4DCF6 /* MapKit.framework */; };
-		C57ADE5018A27CE700D4DCF6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C57ADE4F18A27CE700D4DCF6 /* CoreLocation.framework */; };
 		C57ADE5318A27DA900D4DCF6 /* MyLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = C57ADE5218A27DA900D4DCF6 /* MyLocation.m */; };
 		C57ADE5818A2810900D4DCF6 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = C57ADE5718A2810900D4DCF6 /* MBProgressHUD.m */; };
 		C57ADE6018A30B7F00D4DCF6 /* PBAQuake.m in Sources */ = {isa = PBXBuildFile; fileRef = C57ADE5F18A30B7F00D4DCF6 /* PBAQuake.m */; };
@@ -83,9 +80,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C57ADE5018A27CE700D4DCF6 /* CoreLocation.framework in Frameworks */,
-				C57ADE4E18A27AD100D4DCF6 /* MapKit.framework in Frameworks */,
-				C57ADE1C18A27A5B00D4DCF6 /* CoreGraphics.framework in Frameworks */,
 				C57ADE1E18A27A5B00D4DCF6 /* UIKit.framework in Frameworks */,
 				C57ADE1A18A27A5B00D4DCF6 /* Foundation.framework in Frameworks */,
 			);
