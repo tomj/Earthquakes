@@ -41,7 +41,7 @@ NSString * const PBAQuakeStoreBaseURLString = @"http://earthquake-report.com/fee
                                                               NSURLResponse *response,
                                                               NSError *error) {
 
-            if (!error) {
+            if (data) {
                 NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data
                                                                      options:0
                                                                        error:&error];
@@ -62,8 +62,7 @@ NSString * const PBAQuakeStoreBaseURLString = @"http://earthquake-report.com/fee
                 if (completion) {
                     completion(quakeData, nil);
                 }
-            }
-            else {
+            } else {
                 if (completion) {
                     completion(nil, error);
                 }
