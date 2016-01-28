@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10118.6" systemVersion="15D21" minimumToolsVersion="Xcode 7.0">
+    <entity name="CacheTime" representedClassName="CacheTime" syncable="YES">
+        <attribute name="cachedAt" optional="YES" attributeType="Date" syncable="YES"/>
+    </entity>
+    <entity name="Quake" representedClassName="Quake" syncable="YES">
+        <attribute name="dateTime" attributeType="Date" syncable="YES"/>
+        <attribute name="depth" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="latitude" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="location" attributeType="String" syncable="YES"/>
+        <attribute name="longitude" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="magnitude" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="title" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Quake" positionX="-54" positionY="-9" width="128" height="150"/>
+        <element name="CacheTime" positionX="-54" positionY="45" width="128" height="60"/>
+    </elements>
+</model>

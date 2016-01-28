@@ -13,12 +13,14 @@
 #import "PBAMapViewController.h"
 #import "MBProgressHUD.h"
 
-// Store
-#import "PBAQuakeStore.h"
+// Meta
+#import "PBAObjectStore.h"
+#import "PBAWebService.h"
 
 // Model
-#import "PBAQuake.h"
-#import "MyLocation.h"
+//#import "MyLocation.h"
+#import "Quake.h"
+
 
 // Categories
 #import "UIButton+PBAButton.h"
@@ -27,6 +29,7 @@
 
 @interface PBAMapViewController () <CLLocationManagerDelegate, MKMapViewDelegate>
 
+@property (nonatomic) PBAObjectStore *objectStore;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIButton *recenterMapToUserButton;
 @property (strong, nonatomic) NSArray *quakeData;
@@ -36,12 +39,11 @@
 
 @implementation PBAMapViewController
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (instancetype)initWithStore:(PBAObjectStore *)store
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super init];
     if (self) {
-        self.tabBarItem.title = @"Map";
-        self.tabBarItem.image = [UIImage imageNamed:@"first"];
+        _objectStore = store;
     }
     return self;
 }
@@ -53,17 +55,15 @@
     [self.recenterMapToUserButton pba_setRoundedButtonStyle];
 
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[PBAQuakeStore sharedStore] downloadDataWithCompletion:^(NSArray *quakes, NSError *error) {
-        [hud hide:YES];
-        if (!error) {
-            self.quakeData = quakes;
 
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self plotQuakeData];
-            });
+    [self.objectStore.webService getObjectsWithCompletion:^(NSArray *objects, NSError *error) {
+        [hud hide:YES];
+        if (objects) {
+            for (Quake *o in objects) {
+                NSLog(@"%@ / %@", [o valueForKey:@"title"], [o valueForKey:@"magnitude"]);
+            }
         } else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error performing the request. Please try again." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
-            [alert show];
+            NSLog(@"Womp. Error: %@", error.localizedDescription);
         }
     }];
 
@@ -84,7 +84,7 @@
     self.mapView.showsUserLocation = YES;
     self.mapView.showsPointsOfInterest = NO;
 
-    [self recenterMapToUsersCurrentLocationAfterDelay:5.0];
+    [self recenterMapToUsersCurrentLocationAfterDelay:10.0];
 }
 
 - (void)didReceiveMemoryWarning
@@ -110,20 +110,20 @@
 
 - (void)plotQuakeData
 {
-    for (PBAQuake *q in self.quakeData) {
-        CLLocationCoordinate2D coordinate;
-        coordinate.latitude = q.latitude;
-        coordinate.longitude  = q.longitude;
-        NSString *location = q.location;
-        NSString *magnitude = [NSString stringWithFormat:@"Magnitude: %g", q.magnitude];
-
-        MyLocation *annotation = [[MyLocation alloc]
-                                  initWithName:location
-                                  address:magnitude
-                                  coordinate:coordinate];
-
-        [self.mapView addAnnotation:annotation];
-    }
+    //    for (PBAQuake *q in self.quakeData) {
+    //        CLLocationCoordinate2D coordinate;
+    //        coordinate.latitude = q.latitude;
+    //        coordinate.longitude  = q.longitude;
+    //        NSString *location = q.location;
+    //        NSString *magnitude = [NSString stringWithFormat:@"Magnitude: %g", q.magnitude];
+    //
+    //        MyLocation *annotation = [[MyLocation alloc]
+    //                                  initWithName:location
+    //                                  address:magnitude
+    //                                  coordinate:coordinate];
+    //
+    //        [self.mapView addAnnotation:annotation];
+    //    }
 }
 
 - (IBAction)recenterMapToUsersCurrentLocation
@@ -131,6 +131,7 @@
     [self recenterMapToUsersCurrentLocationAfterDelay:0.0];
 }
 
+// TODO check to see that location updated, then update.
 - (void)recenterMapToUsersCurrentLocationAfterDelay:(double)delay {
     __weak __typeof(self)weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void) {

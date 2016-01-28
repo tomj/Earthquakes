@@ -22,11 +22,18 @@
 		C57ADE4C18A27A6900D4DCF6 /* PBAMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C57ADE4A18A27A6900D4DCF6 /* PBAMapViewController.xib */; };
 		C57ADE5318A27DA900D4DCF6 /* MyLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = C57ADE5218A27DA900D4DCF6 /* MyLocation.m */; };
 		C57ADE5818A2810900D4DCF6 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = C57ADE5718A2810900D4DCF6 /* MBProgressHUD.m */; };
-		C57ADE6018A30B7F00D4DCF6 /* PBAQuake.m in Sources */ = {isa = PBXBuildFile; fileRef = C57ADE5F18A30B7F00D4DCF6 /* PBAQuake.m */; };
-		C57ADE6718A30D5000D4DCF6 /* PBAQuakeStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C57ADE6618A30D5000D4DCF6 /* PBAQuakeStore.m */; };
 		C59CB9991C560321005C9195 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C59CB9981C560321005C9195 /* Default-568h@2x.png */; };
 		C59CB9B51C587110005C9195 /* UIButton+PBAButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C59CB9B41C587110005C9195 /* UIButton+PBAButton.m */; };
+		C59CB9BB1C5891BB005C9195 /* CoreDataStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C59CB9B91C5891BB005C9195 /* CoreDataStore.xcdatamodeld */; };
+		C59CB9C01C5893C8005C9195 /* Quake+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C59CB9BD1C5893C8005C9195 /* Quake+CoreDataProperties.m */; };
+		C59CB9C11C5893C8005C9195 /* Quake.m in Sources */ = {isa = PBXBuildFile; fileRef = C59CB9BF1C5893C8005C9195 /* Quake.m */; };
+		C59CB9C41C58962B005C9195 /* PBACoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = C59CB9C31C58962B005C9195 /* PBACoreDataStack.m */; };
+		C59CB9C71C58B561005C9195 /* PBAWebService.m in Sources */ = {isa = PBXBuildFile; fileRef = C59CB9C61C58B561005C9195 /* PBAWebService.m */; };
+		C59CB9CA1C58B587005C9195 /* PBAObjectStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C59CB9C91C58B587005C9195 /* PBAObjectStore.m */; };
 		C5B8771B18A83EE6001CBC8E /* PBAPlotViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5B8771918A83EE6001CBC8E /* PBAPlotViewController.xib */; };
+		C5FDB7391C5A098E00B2922A /* CacheTime+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FDB7361C5A098E00B2922A /* CacheTime+CoreDataProperties.m */; };
+		C5FDB73A1C5A098E00B2922A /* CacheTime.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FDB7381C5A098E00B2922A /* CacheTime.m */; };
+		C5FDB73D1C5A170800B2922A /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FDB73C1C5A170800B2922A /* NSDate+Utilities.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,14 +72,27 @@
 		C57ADE5218A27DA900D4DCF6 /* MyLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLocation.m; sourceTree = "<group>"; };
 		C57ADE5618A2810900D4DCF6 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		C57ADE5718A2810900D4DCF6 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		C57ADE5E18A30B7F00D4DCF6 /* PBAQuake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBAQuake.h; sourceTree = "<group>"; };
-		C57ADE5F18A30B7F00D4DCF6 /* PBAQuake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBAQuake.m; sourceTree = "<group>"; };
-		C57ADE6518A30D5000D4DCF6 /* PBAQuakeStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBAQuakeStore.h; sourceTree = "<group>"; };
-		C57ADE6618A30D5000D4DCF6 /* PBAQuakeStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBAQuakeStore.m; sourceTree = "<group>"; };
 		C59CB9981C560321005C9195 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C59CB9B31C587110005C9195 /* UIButton+PBAButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+PBAButton.h"; sourceTree = "<group>"; };
 		C59CB9B41C587110005C9195 /* UIButton+PBAButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+PBAButton.m"; sourceTree = "<group>"; };
+		C59CB9BA1C5891BB005C9195 /* CoreDataStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataStore.xcdatamodel; sourceTree = "<group>"; };
+		C59CB9BC1C5893C8005C9195 /* Quake+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Quake+CoreDataProperties.h"; sourceTree = "<group>"; };
+		C59CB9BD1C5893C8005C9195 /* Quake+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Quake+CoreDataProperties.m"; sourceTree = "<group>"; };
+		C59CB9BE1C5893C8005C9195 /* Quake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quake.h; sourceTree = "<group>"; };
+		C59CB9BF1C5893C8005C9195 /* Quake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Quake.m; sourceTree = "<group>"; };
+		C59CB9C21C58962B005C9195 /* PBACoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBACoreDataStack.h; sourceTree = "<group>"; };
+		C59CB9C31C58962B005C9195 /* PBACoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBACoreDataStack.m; sourceTree = "<group>"; };
+		C59CB9C51C58B561005C9195 /* PBAWebService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBAWebService.h; sourceTree = "<group>"; };
+		C59CB9C61C58B561005C9195 /* PBAWebService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBAWebService.m; sourceTree = "<group>"; };
+		C59CB9C81C58B587005C9195 /* PBAObjectStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBAObjectStore.h; sourceTree = "<group>"; };
+		C59CB9C91C58B587005C9195 /* PBAObjectStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBAObjectStore.m; sourceTree = "<group>"; };
 		C5B8771918A83EE6001CBC8E /* PBAPlotViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PBAPlotViewController.xib; sourceTree = "<group>"; };
+		C5FDB7351C5A098E00B2922A /* CacheTime+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CacheTime+CoreDataProperties.h"; sourceTree = "<group>"; };
+		C5FDB7361C5A098E00B2922A /* CacheTime+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CacheTime+CoreDataProperties.m"; sourceTree = "<group>"; };
+		C5FDB7371C5A098E00B2922A /* CacheTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CacheTime.h; sourceTree = "<group>"; };
+		C5FDB7381C5A098E00B2922A /* CacheTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CacheTime.m; sourceTree = "<group>"; };
+		C5FDB73B1C5A170800B2922A /* NSDate+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utilities.h"; sourceTree = "<group>"; };
+		C5FDB73C1C5A170800B2922A /* NSDate+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utilities.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,7 +156,7 @@
 			children = (
 				C59CB9B21C5870F4005C9195 /* Categories */,
 				C57ADE5418A280E300D4DCF6 /* Vendor */,
-				C57ADE6418A30D3E00D4DCF6 /* Store */,
+				C57ADE6418A30D3E00D4DCF6 /* Stacks */,
 				C57ADE6318A30BB400D4DCF6 /* Views */,
 				C57ADE6118A30B8400D4DCF6 /* Models */,
 				C57ADE6218A30B9200D4DCF6 /* Controllers */,
@@ -197,8 +217,14 @@
 			children = (
 				C57ADE5118A27DA900D4DCF6 /* MyLocation.h */,
 				C57ADE5218A27DA900D4DCF6 /* MyLocation.m */,
-				C57ADE5E18A30B7F00D4DCF6 /* PBAQuake.h */,
-				C57ADE5F18A30B7F00D4DCF6 /* PBAQuake.m */,
+				C59CB9BC1C5893C8005C9195 /* Quake+CoreDataProperties.h */,
+				C59CB9BD1C5893C8005C9195 /* Quake+CoreDataProperties.m */,
+				C59CB9BE1C5893C8005C9195 /* Quake.h */,
+				C59CB9BF1C5893C8005C9195 /* Quake.m */,
+				C5FDB7351C5A098E00B2922A /* CacheTime+CoreDataProperties.h */,
+				C5FDB7361C5A098E00B2922A /* CacheTime+CoreDataProperties.m */,
+				C5FDB7371C5A098E00B2922A /* CacheTime.h */,
+				C5FDB7381C5A098E00B2922A /* CacheTime.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -223,13 +249,18 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
-		C57ADE6418A30D3E00D4DCF6 /* Store */ = {
+		C57ADE6418A30D3E00D4DCF6 /* Stacks */ = {
 			isa = PBXGroup;
 			children = (
-				C57ADE6518A30D5000D4DCF6 /* PBAQuakeStore.h */,
-				C57ADE6618A30D5000D4DCF6 /* PBAQuakeStore.m */,
+				C59CB9C81C58B587005C9195 /* PBAObjectStore.h */,
+				C59CB9C91C58B587005C9195 /* PBAObjectStore.m */,
+				C59CB9C51C58B561005C9195 /* PBAWebService.h */,
+				C59CB9C61C58B561005C9195 /* PBAWebService.m */,
+				C59CB9C21C58962B005C9195 /* PBACoreDataStack.h */,
+				C59CB9C31C58962B005C9195 /* PBACoreDataStack.m */,
+				C59CB9B91C5891BB005C9195 /* CoreDataStore.xcdatamodeld */,
 			);
-			name = Store;
+			name = Stacks;
 			sourceTree = "<group>";
 		};
 		C59CB9B21C5870F4005C9195 /* Categories */ = {
@@ -237,6 +268,8 @@
 			children = (
 				C59CB9B31C587110005C9195 /* UIButton+PBAButton.h */,
 				C59CB9B41C587110005C9195 /* UIButton+PBAButton.m */,
+				C5FDB73B1C5A170800B2922A /* NSDate+Utilities.h */,
+				C5FDB73C1C5A170800B2922A /* NSDate+Utilities.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -340,14 +373,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C57ADE6718A30D5000D4DCF6 /* PBAQuakeStore.m in Sources */,
 				C57ADE2A18A27A5B00D4DCF6 /* PBAAppDelegate.m in Sources */,
 				C57ADE2618A27A5B00D4DCF6 /* main.m in Sources */,
+				C59CB9CA1C58B587005C9195 /* PBAObjectStore.m in Sources */,
+				C59CB9C01C5893C8005C9195 /* Quake+CoreDataProperties.m in Sources */,
+				C5FDB73D1C5A170800B2922A /* NSDate+Utilities.m in Sources */,
 				C59CB9B51C587110005C9195 /* UIButton+PBAButton.m in Sources */,
 				C57ADE5818A2810900D4DCF6 /* MBProgressHUD.m in Sources */,
-				C57ADE6018A30B7F00D4DCF6 /* PBAQuake.m in Sources */,
+				C5FDB7391C5A098E00B2922A /* CacheTime+CoreDataProperties.m in Sources */,
+				C59CB9BB1C5891BB005C9195 /* CoreDataStore.xcdatamodeld in Sources */,
 				C57ADE5318A27DA900D4DCF6 /* MyLocation.m in Sources */,
+				C59CB9C71C58B561005C9195 /* PBAWebService.m in Sources */,
+				C59CB9C41C58962B005C9195 /* PBACoreDataStack.m in Sources */,
 				C57ADE4B18A27A6900D4DCF6 /* PBAMapViewController.m in Sources */,
+				C59CB9C11C5893C8005C9195 /* Quake.m in Sources */,
+				C5FDB73A1C5A098E00B2922A /* CacheTime.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,6 +596,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C59CB9B91C5891BB005C9195 /* CoreDataStore.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C59CB9BA1C5891BB005C9195 /* CoreDataStore.xcdatamodel */,
+			);
+			currentVersion = C59CB9BA1C5891BB005C9195 /* CoreDataStore.xcdatamodel */;
+			path = CoreDataStore.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = C57ADE0E18A27A5B00D4DCF6 /* Project object */;
 }
