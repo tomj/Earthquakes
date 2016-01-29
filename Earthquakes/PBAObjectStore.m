@@ -10,8 +10,8 @@
 #import "PBACoreDataStack.h"
 #import "PBAWebService.h"
 
-NSString * const PBAObjectStoreCoreDataStackModelName = @"CoreDataStore";
-NSString * const PBAObjectStoreCoreDataEntityQuake = @"Quake";
+NSString * const PBAObjectStoreCoreDataStackModelName   = @"CoreDataStore";
+NSString * const PBAObjectStoreCoreDataEntityQuake      = @"Quake";
 
 @implementation PBAObjectStore
 

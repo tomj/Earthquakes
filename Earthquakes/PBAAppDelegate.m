@@ -31,7 +31,7 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-    PBACoreDataStack *coreDataStack = [[PBACoreDataStack alloc] initWithModelName:@"CoreDataStore"];
+    PBACoreDataStack *coreDataStack = [[PBACoreDataStack alloc] initWithModelName:PBACoreDataStackSQLiteStore];
     PBAWebService *webService = [[PBAWebService alloc] init];
     PBAObjectStore *objectStore = [[PBAObjectStore alloc] initWithCoreDataStack:coreDataStack webService:webService];
     PBAMapViewController *mvc = [[PBAMapViewController alloc] initWithStore:objectStore];
