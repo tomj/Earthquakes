@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class PBAObjectStore;
+
 @interface PBAMapViewController : UIViewController
+
+- (instancetype)initWithStore:(PBAObjectStore *)store;
 
 @end

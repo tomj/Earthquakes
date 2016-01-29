@@ -8,19 +8,40 @@
 
 #import "PBAAppDelegate.h"
 #import "PBAMapViewController.h"
+#import "PBAObjectStore.h"
+#import "PBACoreDataStack.h"
+#import "PBAWebService.h"
 
 @implementation PBAAppDelegate
+
+/*
+          cds   ws
+            \  /
+             os      // Importer, can this just be methods on your store?
+             |
+             vcX     // has an Obj Store
+             |
+             vcY     // has an Obj Store
+             .
+             .
+             .
+ */
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-    PBAMapViewController *mvc = [[PBAMapViewController alloc] init];
+    PBACoreDataStack *coreDataStack = [[PBACoreDataStack alloc] initWithModelName:@"CoreDataStore"];
+    PBAWebService *webService = [[PBAWebService alloc] init];
+    PBAObjectStore *objectStore = [[PBAObjectStore alloc] initWithCoreDataStack:coreDataStack webService:webService];
+    PBAMapViewController *mvc = [[PBAMapViewController alloc] initWithStore:objectStore];
+
     UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:mvc];
 
     self.window.rootViewController = nc;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+
     return YES;
 }
 
