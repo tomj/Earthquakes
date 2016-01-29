@@ -38,11 +38,7 @@ NSString * const PBAWebServiceBaseURL = @"http://earthquake-report.com/feeds/";
 
 - (void)getObjectsWithCompletion:(void (^)(NSArray *objects, NSError *error))completion;
 {
-    CacheTime *ct = [self.coreDataStack lastCacheAtDate];
-    NSTimeInterval diff = [[NSDate new] secondsSinceDate:ct.cachedAt];
-    NSLog(@"hour diff: %g", diff);
-
-    if (ct.cachedAt && diff < 86400.0) {
+    if ([self shouldPullDataFromCache]) {
         NSArray *objects = [self.coreDataStack objectsFromEntity:PBACoreDataStackEntityQuake
                                           inManagedObjectContext:self.coreDataStack.mainQueueContext];
         if (objects) {
@@ -126,6 +122,14 @@ NSString * const PBAWebServiceBaseURL = @"http://earthquake-report.com/feeds/";
         [strongSelf.coreDataStack saveManagedObjectContext:context];
     }];
     return quake;
+}
+
+- (BOOL)shouldPullDataFromCache
+{
+    CacheTime *ct = [self.coreDataStack lastCacheAtDate];
+    NSTimeInterval diff = [[NSDate new] secondsSinceDate:ct.cachedAt];
+    BOOL pullFromCache = (ct.cachedAt && diff < 86400.0);
+    return pullFromCache;
 }
 
 @end
