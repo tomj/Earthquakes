@@ -10,6 +10,6 @@
 
 @interface NSDate (Utilities)
 
-- (NSInteger)hoursAfterDate:(NSDate *)aDate;
+- (NSTimeInterval)secondsSinceDate:(NSDate *)aDate;
 
 @end

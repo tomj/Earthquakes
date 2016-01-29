@@ -21,7 +21,7 @@ NSString * const PBAObjectStoreCoreDataEntityQuake = @"Quake";
     if (self) {
         _coreDataStack = cds;
         _webService = ws;
-        _webService.coreDataStack = _coreDataStack; // TODO you're coupling these, brah?
+        _webService.coreDataStack = _coreDataStack;
     }
     return self;
 }

@@ -19,8 +19,6 @@ extern NSString * const PBACoreDataStackEntityCacheTime;
 
 @property (nonatomic) NSManagedObjectContext *mainQueueContext;
 
-// TODO getter for mqc
-
 - (instancetype)initWithModelName:(NSString *)modelName NS_DESIGNATED_INITIALIZER;
 - (void)saveManagedObjectContext:(NSManagedObjectContext *)moc;
 - (NSArray *)objectsFromEntity:(NSString *)entity inManagedObjectContext:(NSManagedObjectContext *)moc;

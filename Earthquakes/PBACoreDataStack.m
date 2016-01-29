@@ -67,7 +67,6 @@ NSString * const PBACoreDataStackEntityCacheTime    = @"CacheTime";
 
 - (instancetype)init
 {
-    // TODO to constant
     return [self initWithModelName:PBACoreDataStackSQLiteStore];
 }
 
@@ -96,8 +95,8 @@ NSString * const PBACoreDataStackEntityCacheTime    = @"CacheTime";
     NSEntityDescription *ed = [NSEntityDescription entityForName:entity inManagedObjectContext:moc];
     request.entity = ed;
 
-//    NSSortDescriptor *sd = [[NSSortDescriptor alloc] initWithKey:@"magnitude" ascending:NO];
-//    request.sortDescriptors = @[sd];
+    //    NSSortDescriptor *sd = [[NSSortDescriptor alloc] initWithKey:@"magnitude" ascending:NO];
+    //    request.sortDescriptors = @[sd];
 
     NSError *error;
     NSArray *results = [moc executeFetchRequest:request error:&error];

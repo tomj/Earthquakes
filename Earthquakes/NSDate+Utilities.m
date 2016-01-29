@@ -8,16 +8,11 @@
 
 #import "NSDate+Utilities.h"
 
-#define D_HOUR  3600.0
-
 @implementation NSDate (Utilities)
 
-// Credit to Erica Sadun
-// https://github.com/erica/NSDate-Extensions/blob/master/NSDate%2BUtilities.m
-- (NSInteger)hoursAfterDate:(NSDate *)aDate;
+- (NSTimeInterval)secondsSinceDate:(NSDate *)aDate;
 {
-    NSTimeInterval timeInterval = [self timeIntervalSinceDate:aDate];
-    return (NSInteger) (timeInterval / D_HOUR);
+    return [self timeIntervalSinceDate:aDate];
 }
 
 @end

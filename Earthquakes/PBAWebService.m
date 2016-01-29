@@ -39,32 +39,18 @@ NSString * const PBAWebServiceBaseURL = @"http://earthquake-report.com/feeds/";
 - (void)getObjectsWithCompletion:(void (^)(NSArray *objects, NSError *error))completion;
 {
     CacheTime *ct = [self.coreDataStack lastCacheAtDate];
-    NSLog(@"Last cached at: %@", ct.cachedAt);
-    NSInteger diff = [[NSDate new] hoursAfterDate:ct.cachedAt];
-    NSLog(@"hour diff: %lul", (unsigned long)diff);
+    NSTimeInterval diff = [[NSDate new] secondsSinceDate:ct.cachedAt];
+    NSLog(@"hour diff: %g", diff);
 
-    //    ----------------------------------------------------------------------
-    //    retrieve from cache
-    //    ----------------------------------------------------------------------
-
-    //    if (timeSinceLastCache && timeSinceLastCache < 24HOURS) {
-    if (ct.cachedAt && diff < 24) {
-        NSLog(@"pull from cache");
-
+    if (ct.cachedAt && diff < 86400.0) {
         NSArray *objects = [self.coreDataStack objectsFromEntity:PBACoreDataStackEntityQuake
                                           inManagedObjectContext:self.coreDataStack.mainQueueContext];
         if (objects) {
             completion(objects, nil);
         } else {
-            // TODO return an error
             completion(nil, nil);
         }
-    }
-    //    ----------------------------------------------------------------------
-    //    retrieve from webservice
-    //    ----------------------------------------------------------------------
-    else {
-        NSLog(@"pull from ws");
+    } else {
         NSString *path = [NSString stringWithFormat:@"%@%@", PBAWebServiceBaseURL, @"recent-eq?json"];
         NSURL *url = [NSURL URLWithString:path];
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -76,17 +62,6 @@ NSString * const PBAWebServiceBaseURL = @"http://earthquake-report.com/feeds/";
             if (data) {
                 NSArray *objects = [self objectsFromJSONData:data inContext:strongSelf.coreDataStack.mainQueueContext];
 
-                /*
-                 options:
-                 1) dump old cache results.
-                 2) leave previous results
-                 a) and only provide results from the last 24 hours.
-                 b) pull all?
-                 - get new objects
-                 - update
-                 - cacheUpdatedAt = [NSDate new];
-                 */
-
                 [strongSelf.coreDataStack updatedCachedAtDate];
 
                 completion(objects, nil);
@@ -95,7 +70,6 @@ NSString * const PBAWebServiceBaseURL = @"http://earthquake-report.com/feeds/";
             }
         }];
         [task resume];
-
     }
 }
 
@@ -110,7 +84,7 @@ NSString * const PBAWebServiceBaseURL = @"http://earthquake-report.com/feeds/";
             [objects addObject:anObject];
         }
     } else {
-        NSLog(@"TODO better error handling. jsonDict is nil");
+        NSLog(@"Error");
     }
     return objects;
 }
