@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@class PBACoreDataStack;
+@class PBAPersistenceController;
 
 @interface PBAWebService : NSObject
 
-@property (nonatomic, weak) PBACoreDataStack *coreDataStack;
+@property (nonatomic, weak) PBAPersistenceController *persistenceController;
 
 - (void)getObjectsWithCompletion:(void (^)(NSArray *objects, NSError *error))completion;
 
