@@ -8,13 +8,10 @@
 
 @import CoreData;
 
-// Model
+#import "PBAWebService.h"
+#import "PBAPersistenceController.h"
 #import "Quake.h"
 #import "CacheTime.h"
-
-// Other
-#import "PBAWebService.h"
-#import "PBACoreDataStack.h"
 #import "NSDate+Utilities.h"
 
 NSString * const PBAWebServiceBaseURL = @"http://earthquake-report.com/feeds/";
@@ -39,8 +36,7 @@ NSString * const PBAWebServiceBaseURL = @"http://earthquake-report.com/feeds/";
 - (void)getObjectsWithCompletion:(void (^)(NSArray *objects, NSError *error))completion;
 {
     if ([self shouldPullDataFromCache]) {
-        NSArray *objects = [self.coreDataStack objectsFromEntity:PBACoreDataStackEntityQuake
-                                          inManagedObjectContext:self.coreDataStack.mainQueueContext];
+        NSArray *objects = [self.persistenceController objectsFromEntity:PBAPersistenceControllerEntityQuake];
         if (objects) {
             completion(objects, nil);
         } else {
@@ -56,10 +52,8 @@ NSString * const PBAWebServiceBaseURL = @"http://earthquake-report.com/feeds/";
             __strong __typeof(weakSelf)strongSelf = weakSelf;
 
             if (data) {
-                NSArray *objects = [self objectsFromJSONData:data inContext:strongSelf.coreDataStack.mainQueueContext];
-
-                [strongSelf.coreDataStack updatedCachedAtDate];
-
+                NSArray *objects = [self objectsFromJSONData:data inContext:strongSelf.persistenceController.managedObjectContext];
+                [strongSelf.persistenceController insertNewCacheTimeRow];
                 completion(objects, nil);
             } else {
                 completion(nil, error);
@@ -109,8 +103,8 @@ NSString * const PBAWebServiceBaseURL = @"http://earthquake-report.com/feeds/";
         __strong __typeof(weakSelf)strongSelf = weakSelf;
 
         // create obj
-        quake = [NSEntityDescription insertNewObjectForEntityForName:PBACoreDataStackEntityQuake inManagedObjectContext:context];
-        quake.location = location;
+        quake = [NSEntityDescription insertNewObjectForEntityForName:PBAPersistenceControllerEntityQuake inManagedObjectContext:context];
+        quake.location = [location capitalizedString];
         quake.title = title;
         quake.depth = depth;
         quake.magnitude = magnitude;
@@ -119,14 +113,14 @@ NSString * const PBAWebServiceBaseURL = @"http://earthquake-report.com/feeds/";
         quake.dateTime = dateTime;
 
         // save obj to moc
-        [strongSelf.coreDataStack saveManagedObjectContext:context];
+        [strongSelf.persistenceController save];
     }];
     return quake;
 }
 
 - (BOOL)shouldPullDataFromCache
 {
-    CacheTime *ct = [self.coreDataStack lastCacheAtDate];
+    CacheTime *ct = [self.persistenceController lastCacheTimeRow];
     NSTimeInterval diff = [[NSDate new] secondsSinceDate:ct.cachedAt];
     BOOL pullFromCache = (ct.cachedAt && diff < 86400.0);
     return pullFromCache;

@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class PBAObjectStore;
+@class PBAWebService;
+@class PBAPersistenceController;
 
 @interface PBAMapViewController : UIViewController
 
-- (instancetype)initWithStore:(PBAObjectStore *)store;
+- (instancetype)initWithWebService:(PBAWebService *)webService persistenceController:(PBAPersistenceController *)persistenceController;
 
 @end

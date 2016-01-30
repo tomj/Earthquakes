@@ -12,38 +12,33 @@
 
 #import "PBAMapViewController.h"
 #import "MBProgressHUD.h"
-
-// Meta
-#import "PBAObjectStore.h"
 #import "PBAWebService.h"
-
-// Model
-//#import "MyLocation.h"
+#import "PBAPersistenceController.h"
 #import "Quake.h"
-
-
-// Categories
 #import "UIButton+PBAButton.h"
+#import "MyLocation.h"
 
 @import CoreLocation;
 
 @interface PBAMapViewController () <CLLocationManagerDelegate, MKMapViewDelegate>
 
-@property (nonatomic) PBAObjectStore *objectStore;
+@property (nonatomic) PBAWebService *webService;
+@property (nonatomic) PBAPersistenceController *persistenceController;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIButton *recenterMapToUserButton;
-@property (strong, nonatomic) NSArray *quakeData;
+@property (nonatomic, copy) NSArray *quakeData;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
 @end
 
 @implementation PBAMapViewController
 
-- (instancetype)initWithStore:(PBAObjectStore *)store
+- (instancetype)initWithWebService:(PBAWebService *)webService persistenceController:(PBAPersistenceController *)persistenceController;
 {
     self = [super init];
     if (self) {
-        _objectStore = store;
+        _webService = webService;
+        _persistenceController = persistenceController;
     }
     return self;
 }
@@ -56,12 +51,12 @@
 
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
-    [self.objectStore.webService getObjectsWithCompletion:^(NSArray *objects, NSError *error) {
+    [self.webService getObjectsWithCompletion:^(NSArray *objects, NSError *error) {
         [hud hide:YES];
         if (objects) {
-            for (Quake *o in objects) {
-                NSLog(@"%@ / %@", [o valueForKey:@"title"], [o valueForKey:@"magnitude"]);
-            }
+            self.quakeData = objects;
+
+            [self plotObjectsOnMap];
         } else {
             NSLog(@"Womp. Error: %@", error.localizedDescription);
         }
@@ -92,7 +87,7 @@
     [super didReceiveMemoryWarning];
 }
 
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
 {
     MKPinAnnotationView *newAnnotation = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pinLocation"];
 
@@ -108,22 +103,22 @@
 
 #pragma mark - Custom methods
 
-- (void)plotQuakeData
+- (void)plotObjectsOnMap
 {
-    //    for (PBAQuake *q in self.quakeData) {
-    //        CLLocationCoordinate2D coordinate;
-    //        coordinate.latitude = q.latitude;
-    //        coordinate.longitude  = q.longitude;
-    //        NSString *location = q.location;
-    //        NSString *magnitude = [NSString stringWithFormat:@"Magnitude: %g", q.magnitude];
-    //
-    //        MyLocation *annotation = [[MyLocation alloc]
-    //                                  initWithName:location
-    //                                  address:magnitude
-    //                                  coordinate:coordinate];
-    //
-    //        [self.mapView addAnnotation:annotation];
-    //    }
+    for (Quake *q in self.quakeData) {
+        CLLocationCoordinate2D coordinate;
+        coordinate.latitude = [q.latitude doubleValue];
+        coordinate.longitude  = [q.longitude doubleValue] ;
+        NSString *location = q.location;
+        NSString *magnitude = [NSString stringWithFormat:@"Magnitude: %@", q.magnitude];
+
+        MyLocation *annotation = [[MyLocation alloc]
+                                  initWithName:location
+                                  address:magnitude
+                                  coordinate:coordinate];
+
+        [self.mapView addAnnotation:annotation];
+    }
 }
 
 - (IBAction)recenterMapToUsersCurrentLocation
