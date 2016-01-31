@@ -8,6 +8,7 @@
 
 #import "PBAAppDelegate.h"
 #import "PBAMapViewController.h"
+#import "PBAListViewController.h"
 #import "PBAPersistenceController.h"
 #import "PBAWebService.h"
 
@@ -36,11 +37,18 @@
 
     PBAWebService *webService = [[PBAWebService alloc] init];
     webService.persistenceController = self.persistenceController;
-    PBAMapViewController *mvc = [[PBAMapViewController alloc] initWithWebService:webService persistenceController:self.persistenceController];
+    PBAMapViewController *mvc = [[PBAMapViewController alloc] initWithWebService:webService
+                                                           persistenceController:self.persistenceController];
+    PBAListViewController *lvc = [[PBAListViewController alloc] initWithWebService:webService
+                                                             persistenceController:self.persistenceController];
 
-    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:mvc];
+    UINavigationController *mnc = [[UINavigationController alloc] initWithRootViewController:mvc];
+    UINavigationController *lnc = [[UINavigationController alloc] initWithRootViewController:lvc];
 
-    self.window.rootViewController = nc;
+    UITabBarController *tbc = [[UITabBarController alloc] init];
+    tbc.viewControllers = @[mnc, lnc];
+
+    self.window.rootViewController = tbc;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
 
