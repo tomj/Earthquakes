@@ -504,6 +504,7 @@
 		C57ADE4318A27A5B00D4DCF6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Earthquakes/Earthquakes-Prefix.pch";
 				INFOPLIST_FILE = "Earthquakes/Earthquakes-Info.plist";
@@ -511,6 +512,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.pouriaalmassi.Earthquakes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -518,6 +520,7 @@
 		C57ADE4418A27A5B00D4DCF6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Earthquakes/Earthquakes-Prefix.pch";
 				INFOPLIST_FILE = "Earthquakes/Earthquakes-Info.plist";
@@ -525,6 +528,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.pouriaalmassi.Earthquakes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
