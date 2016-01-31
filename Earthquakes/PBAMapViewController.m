@@ -39,6 +39,9 @@
     if (self) {
         _webService = webService;
         _persistenceController = persistenceController;
+
+        self.tabBarItem.image = [UIImage imageNamed:@"first"];
+        self.tabBarItem.title = @"Map";
     }
     return self;
 }

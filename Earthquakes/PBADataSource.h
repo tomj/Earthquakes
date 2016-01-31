@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PBADataSource : NSObject
+@interface PBADataSource : NSObject <UITableViewDataSource>
+
+- (instancetype)initWithObjects:(NSArray *)objects;
 
 @end

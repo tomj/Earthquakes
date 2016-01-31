@@ -23,6 +23,8 @@
 		C57ADE5318A27DA900D4DCF6 /* MyLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = C57ADE5218A27DA900D4DCF6 /* MyLocation.m */; };
 		C57ADE5818A2810900D4DCF6 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = C57ADE5718A2810900D4DCF6 /* MBProgressHUD.m */; };
 		C59167241C5DA92D0082350B /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C59167231C5DA92D0082350B /* Launch Screen.storyboard */; };
+		C59167281C5DD2150082350B /* PBAListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C59167261C5DD2150082350B /* PBAListViewController.m */; };
+		C59167291C5DD2150082350B /* PBAListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C59167271C5DD2150082350B /* PBAListViewController.xib */; };
 		C59CB9991C560321005C9195 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C59CB9981C560321005C9195 /* Default-568h@2x.png */; };
 		C59CB9B51C587110005C9195 /* UIButton+PBAButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C59CB9B41C587110005C9195 /* UIButton+PBAButton.m */; };
 		C59CB9C01C5893C8005C9195 /* Quake+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C59CB9BD1C5893C8005C9195 /* Quake+CoreDataProperties.m */; };
@@ -74,6 +76,9 @@
 		C57ADE5618A2810900D4DCF6 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		C57ADE5718A2810900D4DCF6 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		C59167231C5DA92D0082350B /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		C59167251C5DD2150082350B /* PBAListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBAListViewController.h; sourceTree = "<group>"; };
+		C59167261C5DD2150082350B /* PBAListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBAListViewController.m; sourceTree = "<group>"; };
+		C59167271C5DD2150082350B /* PBAListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PBAListViewController.xib; sourceTree = "<group>"; };
 		C59CB9981C560321005C9195 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C59CB9B31C587110005C9195 /* UIButton+PBAButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+PBAButton.h"; sourceTree = "<group>"; };
 		C59CB9B41C587110005C9195 /* UIButton+PBAButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+PBAButton.m"; sourceTree = "<group>"; };
@@ -240,6 +245,8 @@
 				C57ADE4918A27A6900D4DCF6 /* PBAMapViewController.m */,
 				C5FDB73E1C5B1EBA00B2922A /* PBADataSource.h */,
 				C5FDB73F1C5B1EBA00B2922A /* PBADataSource.m */,
+				C59167251C5DD2150082350B /* PBAListViewController.h */,
+				C59167261C5DD2150082350B /* PBAListViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -247,6 +254,7 @@
 		C57ADE6318A30BB400D4DCF6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C59167271C5DD2150082350B /* PBAListViewController.xib */,
 				C57ADE4A18A27A6900D4DCF6 /* PBAMapViewController.xib */,
 				C5B8771918A83EE6001CBC8E /* PBAPlotViewController.xib */,
 				C59167231C5DA92D0082350B /* Launch Screen.storyboard */,
@@ -355,6 +363,7 @@
 			files = (
 				C59167241C5DA92D0082350B /* Launch Screen.storyboard in Resources */,
 				C57ADE2418A27A5B00D4DCF6 /* InfoPlist.strings in Resources */,
+				C59167291C5DD2150082350B /* PBAListViewController.xib in Resources */,
 				C57ADE4C18A27A6900D4DCF6 /* PBAMapViewController.xib in Resources */,
 				C57ADE2C18A27A5B00D4DCF6 /* Images.xcassets in Resources */,
 				C59CB9991C560321005C9195 /* Default-568h@2x.png in Resources */,
@@ -377,6 +386,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C59167281C5DD2150082350B /* PBAListViewController.m in Sources */,
 				C57ADE2A18A27A5B00D4DCF6 /* PBAAppDelegate.m in Sources */,
 				C57ADE2618A27A5B00D4DCF6 /* main.m in Sources */,
 				C59CB9C01C5893C8005C9195 /* Quake+CoreDataProperties.m in Sources */,
