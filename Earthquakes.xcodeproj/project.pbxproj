@@ -163,7 +163,6 @@
 			children = (
 				C59CB9B21C5870F4005C9195 /* Categories */,
 				C57ADE5418A280E300D4DCF6 /* Vendor */,
-				C57ADE6418A30D3E00D4DCF6 /* Stacks */,
 				C57ADE6318A30BB400D4DCF6 /* Views */,
 				C57ADE6118A30B8400D4DCF6 /* Models */,
 				C57ADE6218A30B9200D4DCF6 /* Controllers */,
@@ -222,6 +221,7 @@
 		C57ADE6118A30B8400D4DCF6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C5FDB7441C5C6C0300B2922A /* DataModel.xcdatamodeld */,
 				C57ADE5118A27DA900D4DCF6 /* MyLocation.h */,
 				C57ADE5218A27DA900D4DCF6 /* MyLocation.m */,
 				C59CB9BC1C5893C8005C9195 /* Quake+CoreDataProperties.h */,
@@ -247,6 +247,10 @@
 				C5FDB73F1C5B1EBA00B2922A /* PBADataSource.m */,
 				C59167251C5DD2150082350B /* PBAListViewController.h */,
 				C59167261C5DD2150082350B /* PBAListViewController.m */,
+				C59CB9C51C58B561005C9195 /* PBAWebService.h */,
+				C59CB9C61C58B561005C9195 /* PBAWebService.m */,
+				C5FDB7411C5C60B800B2922A /* PBAPersistenceController.h */,
+				C5FDB7421C5C60B800B2922A /* PBAPersistenceController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -260,18 +264,6 @@
 				C59167231C5DA92D0082350B /* Launch Screen.storyboard */,
 			);
 			name = Views;
-			sourceTree = "<group>";
-		};
-		C57ADE6418A30D3E00D4DCF6 /* Stacks */ = {
-			isa = PBXGroup;
-			children = (
-				C5FDB7441C5C6C0300B2922A /* DataModel.xcdatamodeld */,
-				C59CB9C51C58B561005C9195 /* PBAWebService.h */,
-				C59CB9C61C58B561005C9195 /* PBAWebService.m */,
-				C5FDB7411C5C60B800B2922A /* PBAPersistenceController.h */,
-				C5FDB7421C5C60B800B2922A /* PBAPersistenceController.m */,
-			);
-			name = Stacks;
 			sourceTree = "<group>";
 		};
 		C59CB9B21C5870F4005C9195 /* Categories */ = {
