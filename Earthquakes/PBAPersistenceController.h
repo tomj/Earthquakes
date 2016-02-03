@@ -6,7 +6,8 @@
 //  Copyright © 2016 Pouria Almassi. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
+@import CoreData;
 
 @class CacheTime;
 
@@ -23,6 +24,7 @@ typedef void (^InitCallbackBlock)(void);
 - (void)save;
 
 - (NSArray *)objectsFromEntity:(NSString *)entity;
+- (NSArray *)objectsFromEntity:(NSString *)entity fetchRequest:(NSFetchRequest *)request;
 - (CacheTime *)lastCacheTimeRow;
 - (void)insertNewCacheTimeRow;
 

@@ -13,6 +13,7 @@
 #import "Quake.h"
 #import "CacheTime.h"
 #import "NSDate+Utilities.h"
+#import "NSManagedObject+Helpers.h"
 
 NSString * const PBAWebServiceBaseURL = @"http://earthquake-report.com/feeds/";
 
@@ -103,7 +104,7 @@ NSString * const PBAWebServiceBaseURL = @"http://earthquake-report.com/feeds/";
         __strong __typeof(weakSelf)strongSelf = weakSelf;
 
         // create obj
-        quake = [NSEntityDescription insertNewObjectForEntityForName:PBAPersistenceControllerEntityQuake inManagedObjectContext:context];
+        quake = [Quake insertNewObjectInContext:context];
         quake.location = [location capitalizedString];
         quake.title = title;
         quake.depth = depth;
