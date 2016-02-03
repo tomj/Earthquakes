@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C51E6FE11C5F2B7F00876CFA /* PBAPersistenceControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C51E6FE01C5F2B7F00876CFA /* PBAPersistenceControllerTests.m */; };
+		C51E6FE41C60850D00876CFA /* NSManagedObject+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C51E6FE31C60850D00876CFA /* NSManagedObject+Helpers.m */; };
 		C57ADE1A18A27A5B00D4DCF6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C57ADE1918A27A5B00D4DCF6 /* Foundation.framework */; };
 		C57ADE1E18A27A5B00D4DCF6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C57ADE1D18A27A5B00D4DCF6 /* UIKit.framework */; };
 		C57ADE2418A27A5B00D4DCF6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C57ADE2218A27A5B00D4DCF6 /* InfoPlist.strings */; };
@@ -17,7 +19,6 @@
 		C57ADE3418A27A5B00D4DCF6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C57ADE1918A27A5B00D4DCF6 /* Foundation.framework */; };
 		C57ADE3518A27A5B00D4DCF6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C57ADE1D18A27A5B00D4DCF6 /* UIKit.framework */; };
 		C57ADE3D18A27A5B00D4DCF6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C57ADE3B18A27A5B00D4DCF6 /* InfoPlist.strings */; };
-		C57ADE3F18A27A5B00D4DCF6 /* EarthquakesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C57ADE3E18A27A5B00D4DCF6 /* EarthquakesTests.m */; };
 		C57ADE4B18A27A6900D4DCF6 /* PBAMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C57ADE4918A27A6900D4DCF6 /* PBAMapViewController.m */; };
 		C57ADE4C18A27A6900D4DCF6 /* PBAMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C57ADE4A18A27A6900D4DCF6 /* PBAMapViewController.xib */; };
 		C57ADE5318A27DA900D4DCF6 /* MyLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = C57ADE5218A27DA900D4DCF6 /* MyLocation.m */; };
@@ -50,6 +51,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C51E6FE01C5F2B7F00876CFA /* PBAPersistenceControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBAPersistenceControllerTests.m; sourceTree = "<group>"; };
+		C51E6FE21C60850D00876CFA /* NSManagedObject+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+Helpers.h"; sourceTree = "<group>"; };
+		C51E6FE31C60850D00876CFA /* NSManagedObject+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+Helpers.m"; sourceTree = "<group>"; };
 		C57ADE1618A27A5B00D4DCF6 /* Earthquakes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Earthquakes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C57ADE1918A27A5B00D4DCF6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C57ADE1B18A27A5B00D4DCF6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -65,7 +69,6 @@
 		C57ADE3218A27A5B00D4DCF6 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		C57ADE3A18A27A5B00D4DCF6 /* EarthquakesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EarthquakesTests-Info.plist"; sourceTree = "<group>"; };
 		C57ADE3C18A27A5B00D4DCF6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		C57ADE3E18A27A5B00D4DCF6 /* EarthquakesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EarthquakesTests.m; sourceTree = "<group>"; };
 		C57ADE4818A27A6900D4DCF6 /* PBAMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBAMapViewController.h; sourceTree = "<group>"; };
 		C57ADE4918A27A6900D4DCF6 /* PBAMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBAMapViewController.m; sourceTree = "<group>"; };
 		C57ADE4A18A27A6900D4DCF6 /* PBAMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PBAMapViewController.xib; sourceTree = "<group>"; };
@@ -186,8 +189,8 @@
 		C57ADE3818A27A5B00D4DCF6 /* EarthquakesTests */ = {
 			isa = PBXGroup;
 			children = (
-				C57ADE3E18A27A5B00D4DCF6 /* EarthquakesTests.m */,
 				C57ADE3918A27A5B00D4DCF6 /* Supporting Files */,
+				C51E6FE01C5F2B7F00876CFA /* PBAPersistenceControllerTests.m */,
 			);
 			path = EarthquakesTests;
 			sourceTree = "<group>";
@@ -273,6 +276,8 @@
 				C59CB9B41C587110005C9195 /* UIButton+PBAButton.m */,
 				C5FDB73B1C5A170800B2922A /* NSDate+Utilities.h */,
 				C5FDB73C1C5A170800B2922A /* NSDate+Utilities.m */,
+				C51E6FE21C60850D00876CFA /* NSManagedObject+Helpers.h */,
+				C51E6FE31C60850D00876CFA /* NSManagedObject+Helpers.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -384,6 +389,7 @@
 				C59CB9C01C5893C8005C9195 /* Quake+CoreDataProperties.m in Sources */,
 				C5FDB7461C5C6C0300B2922A /* DataModel.xcdatamodeld in Sources */,
 				C5FDB73D1C5A170800B2922A /* NSDate+Utilities.m in Sources */,
+				C51E6FE41C60850D00876CFA /* NSManagedObject+Helpers.m in Sources */,
 				C59CB9B51C587110005C9195 /* UIButton+PBAButton.m in Sources */,
 				C57ADE5818A2810900D4DCF6 /* MBProgressHUD.m in Sources */,
 				C5FDB7391C5A098E00B2922A /* CacheTime+CoreDataProperties.m in Sources */,
@@ -401,7 +407,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C57ADE3F18A27A5B00D4DCF6 /* EarthquakesTests.m in Sources */,
+				C51E6FE11C5F2B7F00876CFA /* PBAPersistenceControllerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

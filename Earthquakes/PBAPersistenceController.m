@@ -49,16 +49,20 @@ NSString * const PBAPersistenceControllerEntityCacheTime    = @"CacheTime";
     // locate model
     NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"DataModel" withExtension:@"momd"];
     NSManagedObjectModel *MOM = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+
     // verify it initialized properly
     NSAssert(MOM, @"%@:%@ No model to generate store from.", [self class], NSStringFromSelector(_cmd));
 
-    NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:MOM];
+    NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc]
+                                                 initWithManagedObjectModel:MOM];
     NSAssert(coordinator, @"Failed to init coordinator.");
 
-    NSManagedObjectContext *mainMOC = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    NSManagedObjectContext *mainMOC = [[NSManagedObjectContext alloc]
+                                       initWithConcurrencyType:NSMainQueueConcurrencyType];
     [self setManagedObjectContext:mainMOC];
 
-    NSManagedObjectContext *privateMOC = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    NSManagedObjectContext *privateMOC = [[NSManagedObjectContext alloc]
+                                          initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     [self setPrivateContext:privateMOC];
 
     // set PSC for private MOC
@@ -85,7 +89,14 @@ NSString * const PBAPersistenceControllerEntityCacheTime    = @"CacheTime";
         NSURL *storeURL = [documentsURL URLByAppendingPathComponent:@"DataModel.sqlite"];
 
         NSError *error;
-        NSAssert([psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error], @"Error initializing Persistent Store Coordinator: %@\n %@", error.localizedDescription, error.userInfo);
+        NSAssert([psc addPersistentStoreWithType:NSSQLiteStoreType
+                                   configuration:nil
+                                             URL:storeURL
+                                         options:options
+                                           error:&error],
+                 @"Error initializing Persistent Store Coordinator: %@\n %@",
+                 error.localizedDescription,
+                 error.userInfo);
 
         if (!self.initCallback) return;
 
@@ -104,7 +115,8 @@ NSString * const PBAPersistenceControllerEntityCacheTime    = @"CacheTime";
     if (! [self.privateContext hasChanges] && ![self.managedObjectContext hasChanges]) return;
 
     /*
-     "we cannot guarantee that caller is the main thread, we use -performBlockAndWait: against the main context to insure we are talking to it on its own terms."
+     "we cannot guarantee that caller is the main thread, we use -performBlockAndWait: against the 
+     main context to insure we are talking to it on its own terms."
      */
     [self.managedObjectContext performBlockAndWait:^{
         NSError *mainError;
@@ -113,7 +125,9 @@ NSString * const PBAPersistenceControllerEntityCacheTime    = @"CacheTime";
                  mainError.localizedDescription, mainError.userInfo);
 
         /*
-         "Once the main context has saved then we move on to the private queue. This queue can be asynchronous without any issues so we call -performBlock: on it and then call save."
+         "Once the main context has saved then we move on to the private queue. 
+         This queue can be asynchronous without any issues so we call -performBlock: on it and 
+         then call save."
          */
         [self.privateContext performBlock:^{
             NSError *privateError;
@@ -126,9 +140,18 @@ NSString * const PBAPersistenceControllerEntityCacheTime    = @"CacheTime";
 
 - (NSArray *)objectsFromEntity:(NSString *)entity;
 {
-    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:entity];
-    NSEntityDescription *ed = [NSEntityDescription entityForName:entity inManagedObjectContext:self.privateContext];
-    request.entity = ed;
+    return [self objectsFromEntity:entity fetchRequest:nil];
+}
+
+- (NSArray *)objectsFromEntity:(NSString *)entity fetchRequest:(NSFetchRequest *)request;
+{
+    if (!request) {
+        request = [[NSFetchRequest alloc] initWithEntityName:entity];
+    }
+
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:entity
+                                                         inManagedObjectContext:self.managedObjectContext];
+    request.entity = entityDescription;
 
     NSError *error;
     NSArray *results = [self.privateContext executeFetchRequest:request error:&error];
@@ -142,6 +165,7 @@ NSString * const PBAPersistenceControllerEntityCacheTime    = @"CacheTime";
 
 - (CacheTime *)lastCacheTimeRow;
 {
+    // TODO setFetchLimit may be a more performance consciencous way of performing fetch
     return [[self objectsFromEntity:PBAPersistenceControllerEntityCacheTime] lastObject];
 }
 
@@ -151,7 +175,8 @@ NSString * const PBAPersistenceControllerEntityCacheTime    = @"CacheTime";
     __weak __typeof(self)weakSelf = self;
     [self.managedObjectContext performBlock:^{
         __strong __typeof(weakSelf)strongSelf = weakSelf;
-        ct = [NSEntityDescription insertNewObjectForEntityForName:PBAPersistenceControllerEntityCacheTime inManagedObjectContext:strongSelf.managedObjectContext];
+        ct = [NSEntityDescription insertNewObjectForEntityForName:PBAPersistenceControllerEntityCacheTime
+                                           inManagedObjectContext:strongSelf.managedObjectContext];
         [strongSelf.self save];
     }];
 }
