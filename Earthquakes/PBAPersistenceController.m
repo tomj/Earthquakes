@@ -89,14 +89,22 @@ NSString * const PBAPersistenceControllerEntityCacheTime    = @"CacheTime";
         NSURL *storeURL = [documentsURL URLByAppendingPathComponent:@"DataModel.sqlite"];
 
         NSError *error;
-        NSAssert([psc addPersistentStoreWithType:NSSQLiteStoreType
-                                   configuration:nil
-                                             URL:storeURL
-                                         options:options
-                                           error:&error],
+        NSPersistentStore *persistentStore = [psc addPersistentStoreWithType:NSSQLiteStoreType
+                                                  configuration:nil
+                                                            URL:storeURL
+                                                        options:options
+                                                          error:&error];
+
+        NSAssert(persistentStore,
                  @"Error initializing Persistent Store Coordinator: %@\n %@",
                  error.localizedDescription,
                  error.userInfo);
+
+        if (!persistentStore) {
+            NSLog(@"Error initializing Persistent Store Coordinator: %@\n %@",
+                  error.localizedDescription,
+                  error.userInfo);
+        }
 
         if (!self.initCallback) return;
 
@@ -120,6 +128,7 @@ NSString * const PBAPersistenceControllerEntityCacheTime    = @"CacheTime";
      */
     [self.managedObjectContext performBlockAndWait:^{
         NSError *mainError;
+        [self.managedObjectContext save:&mainError];
         NSAssert([self.managedObjectContext save:&mainError],
                  @"Failed to save main context: %@ %@",
                  mainError.localizedDescription, mainError.userInfo);
@@ -131,6 +140,7 @@ NSString * const PBAPersistenceControllerEntityCacheTime    = @"CacheTime";
          */
         [self.privateContext performBlock:^{
             NSError *privateError;
+            [self.privateContext save:&privateError];
             NSAssert([self.privateContext save:&privateError],
                      @"Failed to save private context: %@ %@",
                      privateError.localizedDescription, privateError.userInfo);
