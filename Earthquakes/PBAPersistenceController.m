@@ -17,8 +17,6 @@ NSString * const PBAPersistenceControllerEntityCacheTime    = @"CacheTime";
 
 @interface PBAPersistenceController ()
 
-// TODO rename for consistency
-// TODO rename to be explicit that it is 'main'
 // property attributes here as reminders
 @property (strong, readwrite) NSManagedObjectContext *managedObjectContext;
 @property (strong, readwrite) NSManagedObjectContext *privateContext;
@@ -165,7 +163,6 @@ NSString * const PBAPersistenceControllerEntityCacheTime    = @"CacheTime";
 
 - (CacheTime *)lastCacheTimeRow;
 {
-    // TODO setFetchLimit may be a more performance consciencous way of performing fetch
     return [[self objectsFromEntity:PBAPersistenceControllerEntityCacheTime] lastObject];
 }
 

@@ -12,7 +12,7 @@
 
 - (void)pba_setRoundedButtonStyle;
 {
-    self.layer.cornerRadius = 45.0 / 2.0;
+    self.layer.cornerRadius = 25.0;
     self.alpha = 0.9;
 }
 

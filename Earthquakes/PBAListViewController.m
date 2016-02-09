@@ -45,21 +45,19 @@
 
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
-    // TODO strong self?
+    __weak __typeof (self)weakSelf = self;
     [self.webService getObjectsWithCompletion:^(NSArray *objects, NSError *error) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
         [hud hide:YES];
         if (objects) {
-            self.dataSource = [[PBADataSource alloc] initWithObjects:objects];
-            self.tableView.dataSource = self.dataSource;
+            strongSelf.dataSource = [[PBADataSource alloc] initWithObjects:objects];
+            strongSelf.tableView.dataSource = strongSelf.dataSource;
 
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
+                [strongSelf.tableView reloadData];
             });
-        } else {
-            NSLog(@"Womp. Error: %@", error.localizedDescription);
         }
     }];
-
 }
 
 - (void)didReceiveMemoryWarning {
