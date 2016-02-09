@@ -14,6 +14,7 @@
 @property (nonatomic,strong) NSString *address;
 @property (nonatomic,readonly) CLLocationCoordinate2D coordinate;
 
--(id)initWithName:(NSString*)name address:(NSString*)address coordinate:(CLLocationCoordinate2D)coordinate;
+// TODO can you just init this with an instance of your model?
+-(instancetype)initWithName:(NSString*)name address:(NSString*)address coordinate:(CLLocationCoordinate2D)coordinate;
 
 @end

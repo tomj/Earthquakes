@@ -6,40 +6,42 @@
 //  Copyright (c) 2014 Pouria Almassi. All rights reserved.
 //
 
-//
-#import <MapKit/MapKit.h>
-#import <CoreLocation/CoreLocation.h>
-#import <QuartzCore/QuartzCore.h>
+@import MapKit;
+@import CoreLocation;
+@import QuartzCore;
 
 #import "PBAMapViewController.h"
 #import "MBProgressHUD.h"
-
-// Store
-#import "PBAQuakeStore.h"
-
-// Model
-#import "PBAQuake.h"
+#import "PBAWebService.h"
+#import "PBAPersistenceController.h"
+#import "Quake.h"
+#import "UIButton+PBAButton.h"
 #import "MyLocation.h"
 
 @import CoreLocation;
 
 @interface PBAMapViewController () <CLLocationManagerDelegate, MKMapViewDelegate>
 
-@property (nonatomic, weak) IBOutlet MKMapView *mapView;
-@property (nonatomic, strong) NSArray *quakeData;
-
+@property (nonatomic) PBAWebService *webService;
+@property (nonatomic) PBAPersistenceController *persistenceController;
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (weak, nonatomic) IBOutlet UIButton *recenterMapToUserButton;
+@property (nonatomic, copy) NSArray *quakeData;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
 @end
 
 @implementation PBAMapViewController
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (instancetype)initWithWebService:(PBAWebService *)webService persistenceController:(PBAPersistenceController *)persistenceController;
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super init];
     if (self) {
-        self.tabBarItem.title = @"Map";
+        _webService = webService;
+        _persistenceController = persistenceController;
+
         self.tabBarItem.image = [UIImage imageNamed:@"first"];
+        self.tabBarItem.title = @"Map";
     }
     return self;
 }
@@ -48,44 +50,39 @@
 {
     [super viewDidLoad];
 
-    // progress indicator
+    [self.recenterMapToUserButton pba_setRoundedButtonStyle];
+
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
-    // make network request call through the store
-    [[PBAQuakeStore sharedStore] downloadDataWithCompletion:^(NSArray *quakes, NSError *error) {
-        
+
+    [self.webService getObjectsWithCompletion:^(NSArray *objects, NSError *error) {
         [hud hide:YES];
-        
-        if (!error) {
-            self.quakeData = quakes;
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self plotQuakeData];
-            });
-        }
-        else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                            message:@"There was an error performing the request. Please try again."
-                                                           delegate:self
-                                                  cancelButtonTitle:@"Okay"
-                                                  otherButtonTitles:nil];
-            [alert show];
+        if (objects) {
+            self.quakeData = objects;
+
+            [self plotObjectsOnMap];
+        } else {
+            NSLog(@"Womp. Error: %@", error.localizedDescription);
         }
     }];
-    
-    // map view
-    self.mapView.delegate = self;
-	self.mapView.showsUserLocation = YES;
-    
-    // core location
+
     if (!self.locationManager) {
         self.locationManager = [[CLLocationManager alloc] init];
     }
-    
+
     self.locationManager.delegate = self;
-	self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-	self.locationManager.distanceFilter = 2;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    self.locationManager.distanceFilter = 1;
+
+    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [self.locationManager requestWhenInUseAuthorization];
+    }
     [self.locationManager startUpdatingLocation];
+
+    self.mapView.delegate = self;
+    self.mapView.showsUserLocation = YES;
+    self.mapView.showsPointsOfInterest = NO;
+
+    [self recenterMapToUsersCurrentLocationAfterDelay:10.0];
 }
 
 - (void)didReceiveMemoryWarning
@@ -93,47 +90,51 @@
     [super didReceiveMemoryWarning];
 }
 
-// similar to tableView:cellForRowAtIndexPath:
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
 {
-	MKPinAnnotationView *newAnnotation = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pinLocation"];
-    
+    MKPinAnnotationView *newAnnotation = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pinLocation"];
+
     if (annotation == self.mapView.userLocation) {
         return nil;
     }
-    
-	newAnnotation.pinColor = MKPinAnnotationColorRed;
-	newAnnotation.canShowCallout = YES;
-	newAnnotation.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    
-	return newAnnotation;
-}
 
-#pragma mark - Core Location
+    newAnnotation.pinColor = MKPinAnnotationColorRed;
+    newAnnotation.canShowCallout = YES;
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
-{
-    NSLog(@"%f, %f", self.mapView.userLocation.coordinate.latitude, self.mapView.userLocation.coordinate.longitude);
+    return newAnnotation;
 }
 
 #pragma mark - Custom methods
 
-- (void)plotQuakeData
+- (void)plotObjectsOnMap
 {
-	for (PBAQuake *q in self.quakeData) {
+    for (Quake *q in self.quakeData) {
         CLLocationCoordinate2D coordinate;
-        coordinate.latitude = q.latitude;
-        coordinate.longitude  = q.longitude;
+        coordinate.latitude = [q.latitude doubleValue];
+        coordinate.longitude  = [q.longitude doubleValue] ;
         NSString *location = q.location;
-        NSString *magnitude = [NSString stringWithFormat:@"Magnitude: %g", q.magnitude];
-        
+        NSString *magnitude = [NSString stringWithFormat:@"Magnitude: %@", q.magnitude];
+
         MyLocation *annotation = [[MyLocation alloc]
                                   initWithName:location
                                   address:magnitude
                                   coordinate:coordinate];
-        
+
         [self.mapView addAnnotation:annotation];
-	}
+    }
+}
+
+- (IBAction)recenterMapToUsersCurrentLocation
+{
+    [self recenterMapToUsersCurrentLocationAfterDelay:0.0];
+}
+
+- (void)recenterMapToUsersCurrentLocationAfterDelay:(double)delay {
+    __weak __typeof(self)weakSelf = self;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        strongSelf.mapView.centerCoordinate = strongSelf.mapView.userLocation.coordinate;
+    });
 }
 
 @end

@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class PBAWebService;
+@class PBAPersistenceController;
+
 @interface PBAMapViewController : UIViewController
+
+- (instancetype)initWithWebService:(PBAWebService *)webService persistenceController:(PBAPersistenceController *)persistenceController;
 
 @end
