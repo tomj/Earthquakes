@@ -28,6 +28,8 @@
         [self completeUserInterfaceSetup];
     }]];
 
+    // application.statusBarStyle = UIStatusBarStyleLightContent;
+
     return YES;
 }
 
@@ -52,6 +54,16 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
 
+}
+
+- (void)setStyle
+{
+    UIColor *blahColor = [UIColor colorWithRed:0.0 green:0.502 blue:0.0 alpha:1.0];
+    [UINavigationBar appearance].barTintColor = blahColor;
+    [UINavigationBar appearance].tintColor = blahColor;
+    [UINavigationBar appearance].titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
+    [UITabBar appearance].barTintColor = blahColor;
+    [UITabBar appearance].tintColor = blahColor;
 }
 
 // Sent when the application is about to move from active to inactive state.
