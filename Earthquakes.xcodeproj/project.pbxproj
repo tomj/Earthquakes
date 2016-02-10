@@ -33,6 +33,8 @@
 		C59CB9C11C5893C8005C9195 /* Quake.m in Sources */ = {isa = PBXBuildFile; fileRef = C59CB9BF1C5893C8005C9195 /* Quake.m */; };
 		C59CB9C71C58B561005C9195 /* PBAWebService.m in Sources */ = {isa = PBXBuildFile; fileRef = C59CB9C61C58B561005C9195 /* PBAWebService.m */; };
 		C5B8771B18A83EE6001CBC8E /* PBAPlotViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5B8771918A83EE6001CBC8E /* PBAPlotViewController.xib */; };
+		C5FB83FC1C6AF4F700F298F7 /* PBAListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5FB83FB1C6AF4F700F298F7 /* PBAListTableViewCell.xib */; };
+		C5FB83FF1C6AF51100F298F7 /* PBAListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FB83FE1C6AF51100F298F7 /* PBAListTableViewCell.m */; };
 		C5FDB7391C5A098E00B2922A /* CacheTime+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FDB7361C5A098E00B2922A /* CacheTime+CoreDataProperties.m */; };
 		C5FDB73A1C5A098E00B2922A /* CacheTime.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FDB7381C5A098E00B2922A /* CacheTime.m */; };
 		C5FDB73D1C5A170800B2922A /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FDB73C1C5A170800B2922A /* NSDate+Utilities.m */; };
@@ -95,6 +97,9 @@
 		C59CB9C51C58B561005C9195 /* PBAWebService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBAWebService.h; sourceTree = "<group>"; };
 		C59CB9C61C58B561005C9195 /* PBAWebService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBAWebService.m; sourceTree = "<group>"; };
 		C5B8771918A83EE6001CBC8E /* PBAPlotViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PBAPlotViewController.xib; sourceTree = "<group>"; };
+		C5FB83FB1C6AF4F700F298F7 /* PBAListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PBAListTableViewCell.xib; sourceTree = "<group>"; };
+		C5FB83FD1C6AF51100F298F7 /* PBAListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBAListTableViewCell.h; sourceTree = "<group>"; };
+		C5FB83FE1C6AF51100F298F7 /* PBAListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBAListTableViewCell.m; sourceTree = "<group>"; };
 		C5FDB7351C5A098E00B2922A /* CacheTime+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CacheTime+CoreDataProperties.h"; sourceTree = "<group>"; };
 		C5FDB7361C5A098E00B2922A /* CacheTime+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CacheTime+CoreDataProperties.m"; sourceTree = "<group>"; };
 		C5FDB7371C5A098E00B2922A /* CacheTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CacheTime.h; sourceTree = "<group>"; };
@@ -268,6 +273,9 @@
 				C57ADE4A18A27A6900D4DCF6 /* PBAMapViewController.xib */,
 				C5B8771918A83EE6001CBC8E /* PBAPlotViewController.xib */,
 				C59167231C5DA92D0082350B /* Launch Screen.storyboard */,
+				C5FB83FB1C6AF4F700F298F7 /* PBAListTableViewCell.xib */,
+				C5FB83FD1C6AF51100F298F7 /* PBAListTableViewCell.h */,
+				C5FB83FE1C6AF51100F298F7 /* PBAListTableViewCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -366,6 +374,7 @@
 				C59167241C5DA92D0082350B /* Launch Screen.storyboard in Resources */,
 				C57ADE2418A27A5B00D4DCF6 /* InfoPlist.strings in Resources */,
 				C59167291C5DD2150082350B /* PBAListViewController.xib in Resources */,
+				C5FB83FC1C6AF4F700F298F7 /* PBAListTableViewCell.xib in Resources */,
 				C57ADE4C18A27A6900D4DCF6 /* PBAMapViewController.xib in Resources */,
 				C57ADE2C18A27A5B00D4DCF6 /* Images.xcassets in Resources */,
 				C59CB9991C560321005C9195 /* Default-568h@2x.png in Resources */,
@@ -406,6 +415,7 @@
 				C57ADE4B18A27A6900D4DCF6 /* PBAMapViewController.m in Sources */,
 				C59CB9C11C5893C8005C9195 /* Quake.m in Sources */,
 				C5FDB73A1C5A098E00B2922A /* CacheTime.m in Sources */,
+				C5FB83FF1C6AF51100F298F7 /* PBAListTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,7 +534,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Earthquakes/Earthquakes-Prefix.pch";
 				INFOPLIST_FILE = "Earthquakes/Earthquakes-Info.plist";
@@ -542,7 +552,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Earthquakes/Earthquakes-Prefix.pch";
 				INFOPLIST_FILE = "Earthquakes/Earthquakes-Info.plist";

@@ -11,6 +11,9 @@
 #import "PBAPersistenceController.h"
 #import "MBProgressHUD.h"
 #import "PBADataSource.h"
+#import "PBAListTableViewCell.h"
+
+NSString * const PBAListViewControllerCellReuseIdentifier = @"PBAListTableViewCell";
 
 @interface PBAListViewController ()
 
@@ -41,7 +44,9 @@
 {
     [super viewDidLoad];
 
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"TempCell"];
+    UINib *nib = [UINib nibWithNibName:PBAListViewControllerCellReuseIdentifier bundle:nil];
+    [self.tableView registerNib:nib forCellReuseIdentifier:PBAListViewControllerCellReuseIdentifier];
+    self.tableView.rowHeight = 75.0;
 
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
@@ -50,7 +55,8 @@
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         [hud hide:YES];
         if (objects) {
-            strongSelf.dataSource = [[PBADataSource alloc] initWithObjects:objects];
+            strongSelf.dataSource = [[PBADataSource alloc] initWithObjects:objects
+                                                                identifier:PBAListViewControllerCellReuseIdentifier];
             strongSelf.tableView.dataSource = strongSelf.dataSource;
 
             dispatch_async(dispatch_get_main_queue(), ^{

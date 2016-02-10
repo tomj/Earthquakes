@@ -38,7 +38,7 @@ NSString * const PBAWebServiceBaseURL = @"http://earthquake-report.com/feeds/";
 - (void)getObjectsWithCompletion:(void (^)(NSArray *objects, NSError *error))completion;
 {
     if ([self shouldPullDataFromCache]) {
-        NSArray *objects = [self.persistenceController objectsFromEntity:PBAPersistenceControllerEntityQuake];
+        NSArray *objects = [self.persistenceController quakes];
         if (objects) {
             completion(objects, nil);
         } else {
