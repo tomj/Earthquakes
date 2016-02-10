@@ -23,8 +23,8 @@ typedef void (^InitCallbackBlock)(void);
 - (instancetype)initWithCallback:(InitCallbackBlock)callback;
 - (void)save;
 
-- (NSArray *)objectsFromEntity:(NSString *)entity;
-- (NSArray *)objectsFromEntity:(NSString *)entity fetchRequest:(NSFetchRequest *)request;
+- (NSArray *)quakes;
+
 - (CacheTime *)lastCacheTimeRow;
 - (void)insertNewCacheTimeRow;
 
