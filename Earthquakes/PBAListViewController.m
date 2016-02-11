@@ -35,7 +35,7 @@ NSString * const PBAListViewControllerCellReuseIdentifier = @"PBAListTableViewCe
         _persistenceController = persistenceController;
 
         self.tabBarItem.image = [UIImage imageNamed:@"first"];
-        self.tabBarItem.title = @"List";        
+        self.tabBarItem.title = NSLocalizedString(@"listviewcontroller.tabbaritem.title", @"The tab bar item title for the List view.").capitalizedString;
     }
     return self;
 }
