@@ -41,7 +41,7 @@
         _persistenceController = persistenceController;
 
         self.tabBarItem.image = [UIImage imageNamed:@"first"];
-        self.tabBarItem.title = @"Map";
+        self.tabBarItem.title = NSLocalizedString(@"mapviewcontroller.tabbaritem.title", @"The tab bar item title for the Map view.");
     }
     return self;
 }
