@@ -134,7 +134,7 @@ NSString * const PBAWebServiceBaseURL = @"http://earthquake-report.com/feeds/";
 
 - (BOOL)shouldPullDataFromCache;
 {
-    return [self isCacheLessThan24Hours] || [self isDeviceOffline];
+    return [self isCacheLessThan24Hours];
 }
 
 @end
