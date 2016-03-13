@@ -10,6 +10,7 @@
 
 @interface PBADataSource : NSObject <UITableViewDataSource>
 
-- (instancetype)initWithObjects:(NSArray *)objects;
+- (instancetype)initWithObjects:(NSArray *)objects
+                     identifier:(NSString *)identifier;
 
 @end

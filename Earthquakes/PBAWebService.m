@@ -14,6 +14,7 @@
 #import "CacheTime.h"
 #import "NSDate+Utilities.h"
 #import "NSManagedObject+Helpers.h"
+#import "NSString+Utilities.h"
 
 NSString * const PBAWebServiceBaseURL = @"http://earthquake-report.com/feeds/";
 
@@ -25,7 +26,7 @@ NSString * const PBAWebServiceBaseURL = @"http://earthquake-report.com/feeds/";
 
 @implementation PBAWebService
 
-- (instancetype)init
+- (instancetype)init;
 {
     self = [super init];
     if (self) {
@@ -37,7 +38,7 @@ NSString * const PBAWebServiceBaseURL = @"http://earthquake-report.com/feeds/";
 - (void)getObjectsWithCompletion:(void (^)(NSArray *objects, NSError *error))completion;
 {
     if ([self shouldPullDataFromCache]) {
-        NSArray *objects = [self.persistenceController objectsFromEntity:PBAPersistenceControllerEntityQuake];
+        NSArray *objects = [self.persistenceController quakes];
         if (objects) {
             completion(objects, nil);
         } else {
@@ -64,7 +65,7 @@ NSString * const PBAWebServiceBaseURL = @"http://earthquake-report.com/feeds/";
     }
 }
 
-- (NSArray *)objectsFromJSONData:(NSData *)data inContext:(NSManagedObjectContext *)context
+- (NSArray *)objectsFromJSONData:(NSData *)data inContext:(NSManagedObjectContext *)context;
 {
     NSMutableArray *objects = [NSMutableArray array];
     NSError *error;
@@ -80,7 +81,7 @@ NSString * const PBAWebServiceBaseURL = @"http://earthquake-report.com/feeds/";
     return objects;
 }
 
-- (Quake *)createAndCacheObjectFromJSON:(NSDictionary *)dictionary inContext:(NSManagedObjectContext *)context
+- (Quake *)createAndCacheObjectFromJSON:(NSDictionary *)dictionary inContext:(NSManagedObjectContext *)context;
 {
     NSString *location = [dictionary objectForKey:@"location"];
     NSString *title = [dictionary objectForKey:@"title"];
@@ -105,8 +106,8 @@ NSString * const PBAWebServiceBaseURL = @"http://earthquake-report.com/feeds/";
 
         // create obj
         quake = [Quake insertNewObjectInContext:context];
-        quake.location = [location capitalizedString];
-        quake.title = title;
+        quake.location = [[location trimWhitespace] capitalizedString];
+        quake.title = [title trimWhitespace];
         quake.depth = depth;
         quake.magnitude = magnitude;
         quake.latitude = latitude;
@@ -119,12 +120,21 @@ NSString * const PBAWebServiceBaseURL = @"http://earthquake-report.com/feeds/";
     return quake;
 }
 
-- (BOOL)shouldPullDataFromCache
+- (BOOL)isCacheLessThan24Hours;
 {
     CacheTime *ct = [self.persistenceController lastCacheTimeRow];
     NSTimeInterval diff = [[NSDate new] secondsSinceDate:ct.cachedAt];
-    BOOL pullFromCache = (ct.cachedAt && diff < 86400.0);
-    return pullFromCache;
+    return (ct.cachedAt && diff < 86400.0);
+}
+
+- (BOOL)isDeviceOffline;
+{
+    return YES;
+}
+
+- (BOOL)shouldPullDataFromCache;
+{
+    return [self isCacheLessThan24Hours];
 }
 
 @end

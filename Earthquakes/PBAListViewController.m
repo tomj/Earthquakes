@@ -11,6 +11,9 @@
 #import "PBAPersistenceController.h"
 #import "MBProgressHUD.h"
 #import "PBADataSource.h"
+#import "PBAListTableViewCell.h"
+
+NSString * const PBAListViewControllerCellReuseIdentifier = @"PBAListTableViewCell";
 
 @interface PBAListViewController ()
 
@@ -32,7 +35,7 @@
         _persistenceController = persistenceController;
 
         self.tabBarItem.image = [UIImage imageNamed:@"first"];
-        self.tabBarItem.title = @"List";        
+        self.tabBarItem.title = NSLocalizedString(@"listviewcontroller.tabbaritem.title", @"The tab bar item title for the List view.").capitalizedString;
     }
     return self;
 }
@@ -41,25 +44,26 @@
 {
     [super viewDidLoad];
 
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"TempCell"];
+    UINib *nib = [UINib nibWithNibName:PBAListViewControllerCellReuseIdentifier bundle:nil];
+    [self.tableView registerNib:nib forCellReuseIdentifier:PBAListViewControllerCellReuseIdentifier];
+    self.tableView.rowHeight = 75.0;
 
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
-    // TODO strong self?
+    __weak __typeof (self)weakSelf = self;
     [self.webService getObjectsWithCompletion:^(NSArray *objects, NSError *error) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
         [hud hide:YES];
         if (objects) {
-            self.dataSource = [[PBADataSource alloc] initWithObjects:objects];
-            self.tableView.dataSource = self.dataSource;
+            strongSelf.dataSource = [[PBADataSource alloc] initWithObjects:objects
+                                                                identifier:PBAListViewControllerCellReuseIdentifier];
+            strongSelf.tableView.dataSource = strongSelf.dataSource;
 
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
+                [strongSelf.tableView reloadData];
             });
-        } else {
-            NSLog(@"Womp. Error: %@", error.localizedDescription);
         }
     }];
-
 }
 
 - (void)didReceiveMemoryWarning {

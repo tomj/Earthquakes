@@ -8,7 +8,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PBAMapViewController">
             <connections>
                 <outlet property="mapView" destination="1yQ-fz-n8c" id="GEs-GH-V24"/>
-                <outlet property="recenterMapToUserButton" destination="xe6-M6-PSf" id="r8N-nq-EA1"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -23,24 +22,11 @@
                         <outlet property="delegate" destination="-1" id="8vS-mN-dan"/>
                     </connections>
                 </mapView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xe6-M6-PSf">
-                    <rect key="frame" x="259" y="507" width="45" height="45"/>
-                    <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="45" id="RUE-M4-LZM"/>
-                        <constraint firstAttribute="height" constant="45" id="eMr-sp-sdr"/>
-                    </constraints>
-                    <connections>
-                        <action selector="recenterMapToUsersCurrentLocation" destination="-1" eventType="touchUpInside" id="b4P-x1-BHU"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="xe6-M6-PSf" secondAttribute="bottom" constant="16" id="6hb-O1-cgu"/>
                 <constraint firstItem="1yQ-fz-n8c" firstAttribute="top" secondItem="1" secondAttribute="top" id="8v3-Gc-Qov"/>
                 <constraint firstAttribute="trailing" secondItem="1yQ-fz-n8c" secondAttribute="trailing" id="HcM-F6-8Ah"/>
-                <constraint firstAttribute="trailing" secondItem="xe6-M6-PSf" secondAttribute="trailing" constant="16" id="LmJ-hx-tth"/>
                 <constraint firstItem="1yQ-fz-n8c" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="O3E-SP-KgG"/>
                 <constraint firstAttribute="bottom" secondItem="1yQ-fz-n8c" secondAttribute="bottom" id="zrA-hD-DSx"/>
             </constraints>

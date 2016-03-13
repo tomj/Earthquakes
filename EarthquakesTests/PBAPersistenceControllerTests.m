@@ -39,19 +39,4 @@
     XCTAssertNotNil(self.persistenceController.managedObjectContext, @"Persistence Controller's MOC is nil.");
 }
 
-//- (void)testInitializeCoreData
-//{
-//
-//}
-
-//- (void)testSave
-//{
-//
-//}
-
-- (void)testObjectsFromEntity:(NSString *)entity;
-{
-    //
-}
-
 @end

@@ -25,7 +25,7 @@
 @property (nonatomic) PBAWebService *webService;
 @property (nonatomic) PBAPersistenceController *persistenceController;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property (weak, nonatomic) IBOutlet UIButton *recenterMapToUserButton;
+@property (weak, nonatomic) UIButton *recenterMapToUserButton;
 @property (nonatomic, copy) NSArray *quakeData;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
@@ -41,7 +41,7 @@
         _persistenceController = persistenceController;
 
         self.tabBarItem.image = [UIImage imageNamed:@"first"];
-        self.tabBarItem.title = @"Map";
+        self.tabBarItem.title = NSLocalizedString(@"mapviewcontroller.tabbaritem.title", @"The tab bar item title for the Map view.").capitalizedString;
     }
     return self;
 }
@@ -50,18 +50,12 @@
 {
     [super viewDidLoad];
 
-    [self.recenterMapToUserButton pba_setRoundedButtonStyle];
-
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-
     [self.webService getObjectsWithCompletion:^(NSArray *objects, NSError *error) {
         [hud hide:YES];
         if (objects) {
             self.quakeData = objects;
-
             [self plotObjectsOnMap];
-        } else {
-            NSLog(@"Womp. Error: %@", error.localizedDescription);
         }
     }];
 
@@ -82,7 +76,7 @@
     self.mapView.showsUserLocation = YES;
     self.mapView.showsPointsOfInterest = NO;
 
-    [self recenterMapToUsersCurrentLocationAfterDelay:10.0];
+    [self setUpRecenterMapButton];
 }
 
 - (void)didReceiveMemoryWarning
@@ -92,7 +86,8 @@
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
 {
-    MKPinAnnotationView *newAnnotation = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pinLocation"];
+    MKPinAnnotationView *newAnnotation = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
+                                                                         reuseIdentifier:@"pinLocation"];
 
     if (annotation == self.mapView.userLocation) {
         return nil;
@@ -124,7 +119,7 @@
     }
 }
 
-- (IBAction)recenterMapToUsersCurrentLocation
+- (void)recenterMapToUsersCurrentLocation
 {
     [self recenterMapToUsersCurrentLocationAfterDelay:0.0];
 }
@@ -135,6 +130,48 @@
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         strongSelf.mapView.centerCoordinate = strongSelf.mapView.userLocation.coordinate;
     });
+}
+
+- (void)setUpRecenterMapButton
+{
+    UIButton *aButton = [[UIButton alloc] init];
+    aButton.backgroundColor = [UIColor blueColor];
+    [aButton pba_setRoundedButtonStyle];
+    [aButton addTarget:self action:@selector(recenterMapToUsersCurrentLocation)
+      forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:aButton];
+    aButton.translatesAutoresizingMaskIntoConstraints = NO;
+    id bottomGuide = self.bottomLayoutGuide;
+
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(aButton, bottomGuide);
+
+    NSArray *wConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:[aButton(50)]"
+                                                                    options:0
+                                                                    metrics:nil
+                                                                      views:viewsDictionary];
+
+    NSArray *hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[aButton(50)]"
+                                                                    options:0
+                                                                    metrics:nil
+                                                                      views:viewsDictionary];
+
+    NSArray *xConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:[aButton]-10-|"
+                                                                    options:0
+                                                                    metrics:nil
+                                                                      views:viewsDictionary];
+
+    NSArray *yConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[aButton]-[bottomGuide]"
+                                                                    options:0
+                                                                    metrics:nil
+                                                                      views:viewsDictionary];
+
+    [self.view addConstraints:wConstraints];
+    [self.view addConstraints:hConstraints];
+    [self.view addConstraints:xConstraints];
+    [self.view addConstraints:yConstraints];
+    [self.view layoutSubviews];
+    
+    self.recenterMapToUserButton = aButton;
 }
 
 @end

@@ -17,8 +17,6 @@ NSString * const PBAPersistenceControllerEntityCacheTime    = @"CacheTime";
 
 @interface PBAPersistenceController ()
 
-// TODO rename for consistency
-// TODO rename to be explicit that it is 'main'
 // property attributes here as reminders
 @property (strong, readwrite) NSManagedObjectContext *managedObjectContext;
 @property (strong, readwrite) NSManagedObjectContext *privateContext;
@@ -94,9 +92,9 @@ NSString * const PBAPersistenceControllerEntityCacheTime    = @"CacheTime";
                                             URL:storeURL
                                         options:options
                                           error:&error],
-                 @"Error initializing Persistent Store Coordinator: %@\n %@",
-                 error.localizedDescription,
-                 error.userInfo);
+                @"Error initializing Persistent Store Coordinator: %@\n %@",
+                error.localizedDescription,
+                error.userInfo);
 
         if (!self.initCallback) return;
 
@@ -115,43 +113,43 @@ NSString * const PBAPersistenceControllerEntityCacheTime    = @"CacheTime";
     if (! [self.privateContext hasChanges] && ![self.managedObjectContext hasChanges]) return;
 
     /*
-     "we cannot guarantee that caller is the main thread, we use -performBlockAndWait: against the 
+     "we cannot guarantee that caller is the main thread, we use -performBlockAndWait: against the
      main context to insure we are talking to it on its own terms."
      */
     [self.managedObjectContext performBlockAndWait:^{
         NSError *mainError;
         ZAssert([self.managedObjectContext save:&mainError],
-                 @"Failed to save main context: %@ %@",
-                 mainError.localizedDescription, mainError.userInfo);
+                @"Failed to save main context: %@ %@",
+                mainError.localizedDescription, mainError.userInfo);
 
         /*
-         "Once the main context has saved then we move on to the private queue. 
-         This queue can be asynchronous without any issues so we call -performBlock: on it and 
+         "Once the main context has saved then we move on to the private queue.
+         This queue can be asynchronous without any issues so we call -performBlock: on it and
          then call save."
          */
         [self.privateContext performBlock:^{
             NSError *privateError;
             ZAssert([self.privateContext save:&privateError],
-                     @"Failed to save private context: %@ %@",
-                     privateError.localizedDescription, privateError.userInfo);
+                    @"Failed to save private context: %@ %@",
+                    privateError.localizedDescription, privateError.userInfo);
         }];
     }];
 }
 
-- (NSArray *)objectsFromEntity:(NSString *)entity;
+- (NSArray *)objectsFromEntity:(NSString *)entity
+                  fetchRequest:(NSFetchRequest *)request
+                         limit:(NSUInteger)limit
+                sortDescriptor:(NSSortDescriptor *)sortDescriptor;
 {
-    return [self objectsFromEntity:entity fetchRequest:nil];
-}
-
-- (NSArray *)objectsFromEntity:(NSString *)entity fetchRequest:(NSFetchRequest *)request;
-{
-    if (!request) {
-        request = [[NSFetchRequest alloc] initWithEntityName:entity];
-    }
+    if (!request) request = [[NSFetchRequest alloc] initWithEntityName:entity];
 
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:entity
                                                          inManagedObjectContext:self.managedObjectContext];
     request.entity = entityDescription;
+
+    if (sortDescriptor) request.sortDescriptors = @[sortDescriptor];
+
+    if (limit) request.fetchLimit = limit;
 
     NSError *error;
     NSArray *results = [self.privateContext executeFetchRequest:request error:&error];
@@ -163,10 +161,22 @@ NSString * const PBAPersistenceControllerEntityCacheTime    = @"CacheTime";
     }
 }
 
+- (NSArray *)quakes;
+{
+    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"magnitude" ascending:NO];
+    return [self objectsFromEntity:PBAPersistenceControllerEntityQuake
+                      fetchRequest:nil
+                             limit:100
+                    sortDescriptor:sd];
+}
+
 - (CacheTime *)lastCacheTimeRow;
 {
-    // TODO setFetchLimit may be a more performance consciencous way of performing fetch
-    return [[self objectsFromEntity:PBAPersistenceControllerEntityCacheTime] lastObject];
+    NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"cachedAt" ascending:NO];
+    return [[self objectsFromEntity:PBAPersistenceControllerEntityCacheTime
+                       fetchRequest:nil
+                              limit:1
+                     sortDescriptor:sd] lastObject];
 }
 
 - (void)insertNewCacheTimeRow;
