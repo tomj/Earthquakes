@@ -11,6 +11,7 @@
 		C51E6FE41C60850D00876CFA /* NSManagedObject+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C51E6FE31C60850D00876CFA /* NSManagedObject+Helpers.m */; };
 		C529A7D81C6312D200728710 /* NSString+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = C529A7D71C6312D200728710 /* NSString+Utilities.m */; };
 		C52F538C1C6C371200830DF9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C52F538A1C6C371200830DF9 /* Localizable.strings */; };
+		C56E85E61C9A274B00A7203E /* UIColor+PBAColor.m in Sources */ = {isa = PBXBuildFile; fileRef = C56E85E51C9A274B00A7203E /* UIColor+PBAColor.m */; };
 		C57ADE1A18A27A5B00D4DCF6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C57ADE1918A27A5B00D4DCF6 /* Foundation.framework */; };
 		C57ADE1E18A27A5B00D4DCF6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C57ADE1D18A27A5B00D4DCF6 /* UIKit.framework */; };
 		C57ADE2418A27A5B00D4DCF6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C57ADE2218A27A5B00D4DCF6 /* InfoPlist.strings */; };
@@ -89,6 +90,8 @@
 		C52F53A61C6C3D3100830DF9 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C52F53A71C6C3D3900830DF9 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C52F53A81C6C3D4400830DF9 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C56E85E41C9A274B00A7203E /* UIColor+PBAColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+PBAColor.h"; sourceTree = "<group>"; };
+		C56E85E51C9A274B00A7203E /* UIColor+PBAColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+PBAColor.m"; sourceTree = "<group>"; };
 		C57ADE1618A27A5B00D4DCF6 /* Earthquakes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Earthquakes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C57ADE1918A27A5B00D4DCF6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C57ADE1B18A27A5B00D4DCF6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -324,6 +327,8 @@
 			children = (
 				C59CB9B31C587110005C9195 /* UIButton+PBAButton.h */,
 				C59CB9B41C587110005C9195 /* UIButton+PBAButton.m */,
+				C56E85E41C9A274B00A7203E /* UIColor+PBAColor.h */,
+				C56E85E51C9A274B00A7203E /* UIColor+PBAColor.m */,
 				C5FDB73B1C5A170800B2922A /* NSDate+Utilities.h */,
 				C5FDB73C1C5A170800B2922A /* NSDate+Utilities.m */,
 				C51E6FE21C60850D00876CFA /* NSManagedObject+Helpers.h */,
@@ -480,6 +485,7 @@
 				C57ADE5318A27DA900D4DCF6 /* MyLocation.m in Sources */,
 				C59CB9C71C58B561005C9195 /* PBAWebService.m in Sources */,
 				C5FDB7431C5C60B800B2922A /* PBAPersistenceController.m in Sources */,
+				C56E85E61C9A274B00A7203E /* UIColor+PBAColor.m in Sources */,
 				C57ADE4B18A27A6900D4DCF6 /* PBAMapViewController.m in Sources */,
 				C59CB9C11C5893C8005C9195 /* Quake.m in Sources */,
 				C5FDB73A1C5A098E00B2922A /* CacheTime.m in Sources */,
