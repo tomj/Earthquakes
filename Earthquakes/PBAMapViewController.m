@@ -16,6 +16,7 @@
 #import "PBAPersistenceController.h"
 #import "Quake.h"
 #import "UIButton+PBAButton.h"
+#import "UIColor+PBAColor.h"
 #import "MyLocation.h"
 
 @import CoreLocation;
@@ -135,7 +136,7 @@
 - (void)setUpRecenterMapButton
 {
     UIButton *aButton = [[UIButton alloc] init];
-    aButton.backgroundColor = [UIColor blueColor];
+    aButton.backgroundColor = [UIColor pba_blueColor];
     [aButton pba_setRoundedButtonStyle];
     [aButton addTarget:self action:@selector(recenterMapToUsersCurrentLocation)
       forControlEvents:UIControlEventTouchUpInside];
