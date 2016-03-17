@@ -24,7 +24,7 @@
 		C57ADE3D18A27A5B00D4DCF6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C57ADE3B18A27A5B00D4DCF6 /* InfoPlist.strings */; };
 		C57ADE4B18A27A6900D4DCF6 /* PBAMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C57ADE4918A27A6900D4DCF6 /* PBAMapViewController.m */; };
 		C57ADE4C18A27A6900D4DCF6 /* PBAMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C57ADE4A18A27A6900D4DCF6 /* PBAMapViewController.xib */; };
-		C57ADE5318A27DA900D4DCF6 /* MyLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = C57ADE5218A27DA900D4DCF6 /* MyLocation.m */; };
+		C57ADE5318A27DA900D4DCF6 /* PBALocation.m in Sources */ = {isa = PBXBuildFile; fileRef = C57ADE5218A27DA900D4DCF6 /* PBALocation.m */; };
 		C57ADE5818A2810900D4DCF6 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = C57ADE5718A2810900D4DCF6 /* MBProgressHUD.m */; };
 		C59167241C5DA92D0082350B /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C59167231C5DA92D0082350B /* Launch Screen.storyboard */; };
 		C59167281C5DD2150082350B /* PBAListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C59167261C5DD2150082350B /* PBAListViewController.m */; };
@@ -112,8 +112,8 @@
 		C57ADE4A18A27A6900D4DCF6 /* PBAMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PBAMapViewController.xib; sourceTree = "<group>"; };
 		C57ADE4D18A27AD100D4DCF6 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		C57ADE4F18A27CE700D4DCF6 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		C57ADE5118A27DA900D4DCF6 /* MyLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLocation.h; sourceTree = "<group>"; };
-		C57ADE5218A27DA900D4DCF6 /* MyLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLocation.m; sourceTree = "<group>"; };
+		C57ADE5118A27DA900D4DCF6 /* PBALocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBALocation.h; sourceTree = "<group>"; };
+		C57ADE5218A27DA900D4DCF6 /* PBALocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBALocation.m; sourceTree = "<group>"; };
 		C57ADE5618A2810900D4DCF6 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		C57ADE5718A2810900D4DCF6 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		C59167231C5DA92D0082350B /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -275,8 +275,8 @@
 			isa = PBXGroup;
 			children = (
 				C5FDB7441C5C6C0300B2922A /* DataModel.xcdatamodeld */,
-				C57ADE5118A27DA900D4DCF6 /* MyLocation.h */,
-				C57ADE5218A27DA900D4DCF6 /* MyLocation.m */,
+				C57ADE5118A27DA900D4DCF6 /* PBALocation.h */,
+				C57ADE5218A27DA900D4DCF6 /* PBALocation.m */,
 				C59CB9BC1C5893C8005C9195 /* Quake+CoreDataProperties.h */,
 				C59CB9BD1C5893C8005C9195 /* Quake+CoreDataProperties.m */,
 				C59CB9BE1C5893C8005C9195 /* Quake.h */,
@@ -482,7 +482,7 @@
 				C57ADE5818A2810900D4DCF6 /* MBProgressHUD.m in Sources */,
 				C5FDB7391C5A098E00B2922A /* CacheTime+CoreDataProperties.m in Sources */,
 				C5FDB7401C5B1EBA00B2922A /* PBADataSource.m in Sources */,
-				C57ADE5318A27DA900D4DCF6 /* MyLocation.m in Sources */,
+				C57ADE5318A27DA900D4DCF6 /* PBALocation.m in Sources */,
 				C59CB9C71C58B561005C9195 /* PBAWebService.m in Sources */,
 				C5FDB7431C5C60B800B2922A /* PBAPersistenceController.m in Sources */,
 				C56E85E61C9A274B00A7203E /* UIColor+PBAColor.m in Sources */,

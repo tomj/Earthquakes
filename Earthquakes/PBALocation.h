@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
 
-@interface MyLocation : NSObject <MKAnnotation>
+@interface PBALocation : NSObject <MKAnnotation>
 
 @property (nonatomic,strong) NSString *name;
 @property (nonatomic,strong) NSString *address;

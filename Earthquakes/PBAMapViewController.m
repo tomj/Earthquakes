@@ -17,7 +17,7 @@
 #import "Quake.h"
 #import "UIButton+PBAButton.h"
 #import "UIColor+PBAColor.h"
-#import "MyLocation.h"
+#import "PBALocation.h"
 
 @import CoreLocation;
 
@@ -111,7 +111,7 @@
         NSString *location = q.location;
         NSString *magnitude = [NSString stringWithFormat:@"Magnitude: %@", q.magnitude];
 
-        MyLocation *annotation = [[MyLocation alloc]
+        PBALocation *annotation = [[PBALocation alloc]
                                   initWithName:location
                                   address:magnitude
                                   coordinate:coordinate];
