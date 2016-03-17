@@ -12,8 +12,7 @@
 
 @interface PBAWebService : NSObject
 
-@property (nonatomic, weak) PBAPersistenceController *persistenceController;
-
+- (instancetype)initWithPersistenceController:(PBAPersistenceController *)persistenceController;
 - (void)getObjectsWithCompletion:(void (^)(NSArray *objects, NSError *error))completion;
 
 @end

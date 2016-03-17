@@ -21,16 +21,18 @@ NSString * const PBAWebServiceBaseURL = @"http://earthquake-report.com/feeds/";
 @interface PBAWebService ()
 
 @property (nonatomic) NSURLSession *session;
+@property (nonatomic, weak) PBAPersistenceController *persistenceController;
 
 @end
 
 @implementation PBAWebService
 
-- (instancetype)init;
+- (instancetype)initWithPersistenceController:(PBAPersistenceController *)persistenceController;
 {
     self = [super init];
     if (self) {
         _session = [NSURLSession sharedSession];
+        _persistenceController = persistenceController;
     }
     return self;
 }
