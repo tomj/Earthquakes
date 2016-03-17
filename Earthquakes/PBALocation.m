@@ -5,9 +5,9 @@
 //  Copyright (c) 2012 All rights reserved.
 //
 
-#import "MyLocation.h"
+#import "PBALocation.h"
 
-@implementation MyLocation
+@implementation PBALocation
 
 - (instancetype)initWithName:(NSString*)name address:(NSString*)address coordinate:(CLLocationCoordinate2D)coordinate
 {
