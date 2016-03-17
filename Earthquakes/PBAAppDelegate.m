@@ -11,6 +11,7 @@
 #import "PBAListViewController.h"
 #import "PBAPersistenceController.h"
 #import "PBAWebService.h"
+#import "UIColor+PBAColor.h"
 
 @interface PBAAppDelegate ()
 
@@ -28,14 +29,14 @@
         [self completeUserInterfaceSetup];
     }]];
 
-    // application.statusBarStyle = UIStatusBarStyleLightContent;
-
     return YES;
 }
 
 - (void)completeUserInterfaceSetup;
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+
+    [self setTintForWindow:self.window];
 
     PBAWebService *webService = [[PBAWebService alloc] initWithPersistenceController:self.persistenceController];
     PBAMapViewController *mvc = [[PBAMapViewController alloc] initWithWebService:webService persistenceController:self.persistenceController];
@@ -52,14 +53,9 @@
     [self.window makeKeyAndVisible];
 }
 
-- (void)setStyle
+- (void)setTintForWindow:(UIWindow *)window
 {
-    UIColor *blahColor = [UIColor colorWithRed:0.0 green:0.502 blue:0.0 alpha:1.0];
-    [UINavigationBar appearance].barTintColor = blahColor;
-    [UINavigationBar appearance].tintColor = blahColor;
-    [UINavigationBar appearance].titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
-    [UITabBar appearance].barTintColor = blahColor;
-    [UITabBar appearance].tintColor = blahColor;
+    _window.tintColor = [UIColor pba_blueColor];
 }
 
 // Sent when the application is about to move from active to inactive state.
