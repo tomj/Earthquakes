@@ -27,6 +27,8 @@
 
 - (void)tearDown {
     [super tearDown];
+
+    self.persistenceController = nil;
 }
 
 - (void)testPersistenceControllerIsNotNil
