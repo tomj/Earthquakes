@@ -52,11 +52,14 @@
     [super viewDidLoad];
 
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
+    __weak __typeof (self)weakSelf = self;
     [self.webService getObjectsWithCompletion:^(NSArray *objects, NSError *error) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
         [hud hide:YES];
         if (objects) {
-            self.quakeData = objects;
-            [self plotObjectsOnMap];
+            strongSelf.quakeData = objects;
+            [strongSelf plotObjectsOnMap];
         }
     }];
 
