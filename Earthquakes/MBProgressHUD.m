@@ -367,12 +367,11 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 		} else if (animationType == MBProgressHUDAnimationZoomOut) {
 			self.transform = CGAffineTransformConcat(rotationTransform, CGAffineTransformMakeScale(0.5f, 0.5f));
 		}
-
-		self.alpha = 0.02f;
+        dispatch_async(dispatch_get_main_queue(), ^(void) { self.alpha = 0.02f; });
 		[UIView commitAnimations];
 	}
 	else {
-		self.alpha = 0.0f;
+        dispatch_async(dispatch_get_main_queue(), ^(void) { self.alpha = 0.0f; });
 		[self done];
 	}
 	self.showStarted = nil;
@@ -384,7 +383,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 
 - (void)done {
 	isFinished = YES;
-	self.alpha = 0.0f;
+    dispatch_async(dispatch_get_main_queue(), ^{ self.alpha = 0.0f; });
 	if (removeFromSuperViewOnHide) {
 		[self removeFromSuperview];
 	}
@@ -419,7 +418,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 	[self showAnimated:animated whileExecutingBlock:block onQueue:queue completionBlock:NULL];
 }
 
-- (void)showAnimated:(BOOL)animated whileExecutingBlock:(dispatch_block_t)block completionBlock:(void (^)())completion {
+- (void)showAnimated:(BOOL)animated whileExecutingBlock:(dispatch_block_t)block completionBlock:(void (^)(void))completion {
 	dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 	[self showAnimated:animated whileExecutingBlock:block onQueue:queue completionBlock:completion];
 }
