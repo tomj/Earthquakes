@@ -72,13 +72,14 @@ NSString * const PBAWebServiceBaseURL = @"http://earthquake-report.com/feeds/";
     NSMutableArray *objects = [NSMutableArray array];
     NSError *error;
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+    if (error) { DLog(@"Error: %@.", error); }
     if (jsonDict != nil) {
         for (NSDictionary *d in jsonDict) {
             Quake *anObject = [self createAndCacheObjectFromJSON:d inContext:context];
             [objects addObject:anObject];
         }
     } else {
-        NSLog(@"Error");
+        DLog(@"Error: JSON is nil.");
     }
     return objects;
 }
